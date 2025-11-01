@@ -10,9 +10,11 @@ jobs:
   lint:
     name: Lint & Type Check
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     strategy:
       matrix:
-        python-version: ["3.9", "3.10", "3.11"]
+        python-version: ["3.9", "3.10", "3.11", "3.12"]
     
     steps:
     - uses: actions/checkout@v4
@@ -52,9 +54,11 @@ jobs:
   test:
     name: Unit Tests
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     strategy:
       matrix:
-        python-version: ["3.9", "3.10", "3.11"]
+        python-version: ["3.9", "3.10", "3.11", "3.12"]
     
     steps:
     - uses: actions/checkout@v4
@@ -81,6 +85,8 @@ jobs:
   benchmark:
     name: CPU Benchmarks
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     
     steps:
     - uses: actions/checkout@v4
@@ -114,6 +120,8 @@ jobs:
   validation:
     name: Numerical Validation
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     
     steps:
     - uses: actions/checkout@v4
@@ -141,6 +149,8 @@ jobs:
   docs:
     name: Documentation Check
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     
     steps:
     - uses: actions/checkout@v4
@@ -174,6 +184,8 @@ jobs:
   status:
     name: CI Status Summary
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     needs: [lint, test, benchmark, validation, docs]
     if: always()
     

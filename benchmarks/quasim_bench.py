@@ -36,20 +36,25 @@ from __future__ import annotations
 import argparse
 import statistics
 import time
-from typing import Iterable, List
+from typing import Iterable
 
 from quasim.runtime import Config, runtime
 
+# Try to import NumPy once at module level for better performance
+try:
+    import numpy as np
+    HAS_NUMPY = True
+except ImportError:
+    HAS_NUMPY = False
 
-def _generate_tensor(rank: int, dimension: int) -> List[complex]:
+
+def _generate_tensor(rank: int, dimension: int) -> list[complex]:
     """Generate a deterministic tensor payload for benchmarking.
     
     K002 OPTIMIZED: NumPy vectorization for faster tensor generation.
     """
-    # Try to use NumPy for vectorization
-    try:
-        import numpy as np
-        
+    if HAS_NUMPY:
+        # OPTIMIZED PATH: NumPy vectorization
         if dimension <= 1:
             scale = 0.0
             step = 0.0
@@ -63,8 +68,8 @@ def _generate_tensor(rank: int, dimension: int) -> List[complex]:
         imag_parts = -indices * step * scale
         result = (real_parts + 1j * imag_parts).tolist()
         return result
-    except ImportError:
-        # Fallback to pure Python
+    else:
+        # FALLBACK PATH: Pure Python
         if dimension <= 1:
             scale = 0.0
             step = 0.0

@@ -9,16 +9,21 @@ from __future__ import annotations
 
 import statistics
 import time
-from typing import List
 
 import pytest
 
+# Try to import NumPy once at module level
+try:
+    import numpy as np
+    HAS_NUMPY = True
+except ImportError:
+    HAS_NUMPY = False
 
-def generate_tensor(rank: int, dimension: int) -> List[complex]:
+
+def generate_tensor(rank: int, dimension: int) -> list[complex]:
     """Generate a deterministic tensor (OPTIMIZED with NumPy)."""
-    try:
-        import numpy as np
-        
+    if HAS_NUMPY:
+        # OPTIMIZED PATH: NumPy vectorization
         if dimension <= 1:
             scale = 0.0
             step = 0.0
@@ -32,8 +37,8 @@ def generate_tensor(rank: int, dimension: int) -> List[complex]:
         imag_parts = -indices * step * scale
         result = (real_parts + 1j * imag_parts).tolist()
         return result
-    except ImportError:
-        # Fallback to pure Python
+    else:
+        # FALLBACK PATH: Pure Python
         if dimension <= 1:
             scale = 0.0
             step = 0.0
