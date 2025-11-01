@@ -1,23 +1,21 @@
-"""Render Markdown documentation and validate links."""
+"""Render Markdown documentation and validate links.
+
+DEPRECATED: This script is now a thin wrapper around the unified infra.py script.
+Please use 'python scripts/infra.py docs' instead.
+"""
 from __future__ import annotations
 
 import pathlib
-
-import markdown
+import subprocess
+import sys
 
 REPO_ROOT = pathlib.Path(__file__).resolve().parents[1]
 
 
 def main() -> None:
-    docs = sorted((REPO_ROOT / "docs").glob("*.md"))
-    if not docs:
-        raise SystemExit("No documentation found to render")
-    out_dir = REPO_ROOT / "build" / "docs"
-    out_dir.mkdir(parents=True, exist_ok=True)
-    for doc in docs:
-        html = markdown.markdown(doc.read_text())
-        (out_dir / f"{doc.stem}.html").write_text(html)
-        print(f"Rendered {doc.name} -> build/docs/{doc.stem}.html")
+    print("Note: build_docs.py is now a wrapper. Consider using 'python scripts/infra.py docs' directly.")
+    infra_script = REPO_ROOT / "scripts" / "infra.py"
+    subprocess.run([sys.executable, str(infra_script), "docs"], check=True)
 
 
 if __name__ == "__main__":

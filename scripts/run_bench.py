@@ -1,14 +1,16 @@
-"""CLI wrapper to execute the QuASIM micro-benchmark."""
+"""CLI wrapper to execute the QuASIM micro-benchmark.
+
+DEPRECATED: This script is now a thin wrapper around the unified infra.py script.
+Please use 'python scripts/infra.py bench' instead.
+"""
 from __future__ import annotations
 
 import argparse
-import os
+import pathlib
 import subprocess
 import sys
-from pathlib import Path
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
-BENCH_SCRIPT = REPO_ROOT / "benchmarks" / "quasim_bench.py"
+REPO_ROOT = pathlib.Path(__file__).resolve().parents[1]
 
 
 def parse_args() -> argparse.Namespace:
@@ -21,18 +23,15 @@ def parse_args() -> argparse.Namespace:
 
 
 def main() -> None:
+    print("Note: run_bench.py is now a wrapper. Consider using 'python scripts/infra.py bench' directly.")
     args = parse_args()
-    env = dict(**os.environ)
-    python_path = env.get("PYTHONPATH", "")
-    runtime_paths = [str(REPO_ROOT / "runtime" / "python"), str(REPO_ROOT / "quantum")]
-    env["PYTHONPATH"] = ":".join(runtime_paths + ([python_path] if python_path else []))
-
-    cmd = [sys.executable, str(BENCH_SCRIPT)]
+    infra_script = REPO_ROOT / "scripts" / "infra.py"
+    cmd = [sys.executable, str(infra_script), "bench"]
     cmd.extend(["--batches", str(args.batches)])
     cmd.extend(["--rank", str(args.rank)])
     cmd.extend(["--dimension", str(args.dimension)])
     cmd.extend(["--repeat", str(args.repeat)])
-    subprocess.run(cmd, check=True, env=env)
+    subprocess.run(cmd, check=True)
 
 
 if __name__ == "__main__":

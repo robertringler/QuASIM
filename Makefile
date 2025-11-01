@@ -10,20 +10,20 @@ setup:
 
 lint:
 	verilator --lint-only rtl/top/gb10_soc_top.sv rtl/cpu/gb10_cpu_cluster.sv rtl/gpu/gb10_gpu_core.sv rtl/interconnect/axi_noc_router.sv rtl/memory/lpddr5x_controller.sv
-	$(PYTHON) -m scripts.lint
+	$(PYTHON) scripts/infra.py lint
 
 sim:
-	$(PYTHON) scripts/run_sim.py
+	$(PYTHON) scripts/infra.py sim
 
 cov:
-	$(PYTHON) scripts/run_cov.py
+	$(PYTHON) scripts/infra.py cov
 
 runtime:
 	cmake -S runtime/libquasim -B build/libquasim -DCMAKE_BUILD_TYPE=RelWithDebInfo
 	cmake --build build/libquasim
 
 bench: runtime
-	PYTHONPATH=runtime/python:quantum $(PYTHON) benchmarks/quasim_bench.py
+	$(PYTHON) scripts/infra.py bench
 
 install:
 	cmake --install build/libquasim --prefix install
@@ -32,7 +32,7 @@ test:
 	PYTHONPATH=runtime/python:quantum $(PYTHON) -m pytest -q
 
 docs:
-	$(PYTHON) -m scripts.build_docs
+	$(PYTHON) scripts/infra.py docs
 
 clean:
 	rm -rf build install .venv

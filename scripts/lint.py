@@ -1,4 +1,8 @@
-"""Run static analysis passes for firmware and runtime sources."""
+"""Run static analysis passes for firmware and runtime sources.
+
+DEPRECATED: This script is now a thin wrapper around the unified infra.py script.
+Please use 'python scripts/infra.py lint' instead.
+"""
 from __future__ import annotations
 
 import pathlib
@@ -8,34 +12,10 @@ import sys
 REPO_ROOT = pathlib.Path(__file__).resolve().parents[1]
 
 
-def run_clang_format() -> None:
-    sources = [
-        *REPO_ROOT.glob("fw/**/*.c"),
-        *REPO_ROOT.glob("drivers/**/*.c"),
-        *REPO_ROOT.glob("runtime/libquasim/src/**/*.cpp"),
-        *REPO_ROOT.glob("runtime/libquasim/include/**/*.hpp"),
-    ]
-    sources = [str(path) for path in sources if path.is_file()]
-    if not sources:
-        print("No sources discovered for clang-format linting.")
-        return
-    cmd = ["clang-format", "--dry-run", "--Werror", *sources]
-    print("Running", " ".join(cmd))
-    subprocess.check_call(cmd)
-
-
-def run_python_style() -> None:
-    cmd = [sys.executable, "-m", "py_compile", *map(str, REPO_ROOT.glob("**/*.py"))]
-    print("Running", " ".join(cmd[:4]), "... python bytecode check")
-    subprocess.check_call(cmd)
-
-
 def main() -> None:
-    run_python_style()
-    try:
-        run_clang_format()
-    except FileNotFoundError:
-        print("clang-format not found; skipping C/C++ style enforcement", file=sys.stderr)
+    print("Note: lint.py is now a wrapper. Consider using 'python scripts/infra.py lint' directly.")
+    infra_script = REPO_ROOT / "scripts" / "infra.py"
+    subprocess.run([sys.executable, str(infra_script), "lint"], check=True)
 
 
 if __name__ == "__main__":
