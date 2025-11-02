@@ -74,7 +74,7 @@ def benchmark_phase2(
     
     for i in range(repeat):
         start = time.perf_counter()
-        result = runtime.simulate(circuit)
+        _ = runtime.simulate(circuit)
         end = time.perf_counter()
         
         latency_ms = (end - start) * 1000
