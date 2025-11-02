@@ -1,0 +1,18 @@
+apiVersion: v2
+name: quasim-api
+description: QuASIM API Service - REST/gRPC job management
+type: application
+version: 0.1.0
+appVersion: "0.1.0"
+keywords:
+  - quasim
+  - quantum
+  - simulation
+  - aerospace
+  - cfd
+home: https://github.com/robertringler/sybernix
+sources:
+  - https://github.com/robertringler/sybernix
+maintainers:
+  - name: QuASIM Team
+    email: quasim@example.com

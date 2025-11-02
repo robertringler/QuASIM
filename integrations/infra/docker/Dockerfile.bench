@@ -1,0 +1,38 @@
+# QuASIM Benchmark Runner Container
+# Includes CUDA support for GPU benchmarks
+
+FROM nvidia/cuda:12.3.0-runtime-ubuntu22.04
+
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    python3.12 \
+    python3-pip \
+    curl \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Python dependencies
+COPY docker/requirements.txt .
+RUN pip3 install --no-cache-dir \
+    -r requirements.txt \
+    numpy \
+    pytest \
+    pytest-benchmark
+
+# Copy application code
+COPY quasim/ quasim/
+COPY integrations/ integrations/
+COPY benchmarks/ benchmarks/
+
+# Add to Python path
+ENV PYTHONPATH=/app:$PYTHONPATH
+
+# Create output directory
+RUN mkdir -p /app/benchmark_results && \
+    chmod 777 /app/benchmark_results
+
+# Run benchmarks by default
+CMD ["python3", "integrations/benchmarks/aero/run_benchmarks.py", \
+     "--output-dir", "/app/benchmark_results"]
