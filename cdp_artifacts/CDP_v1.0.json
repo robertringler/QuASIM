@@ -1,0 +1,53 @@
+{
+  "package": {
+    "package_id": "CDP_v1.0",
+    "revision": "1.0",
+    "date": "2025-11-02T22:11:14.673988",
+    "standard": "DO-178C Level A / ECSS-Q-ST-80C Rev. 2 / NASA E-HBK-4008",
+    "verification_status": "READY_FOR_AUDIT",
+    "open_anomalies": 0,
+    "artifacts": [
+      "MC_Results_1024.json",
+      "seed_audit.log",
+      "coverage_matrix.csv",
+      "telemetry_interface_spec_v1.0.pdf",
+      "verification_cross_reference_matrix.xlsx",
+      "audit_checklist.pdf"
+    ]
+  },
+  "metadata": {
+    "document_id": "QA-SIM-INT-90D-RDMP-001",
+    "organization": "QuASIM",
+    "partners": [
+      "SpaceX",
+      "NASA SMA"
+    ],
+    "generated_at": "2025-11-02T22:11:14.674009"
+  },
+  "verification_evidence": [
+    {
+      "id": "E-01",
+      "description": "Monte-Carlo Fidelity Report",
+      "source_file": "MC_Results_1024.json",
+      "status": "Verified"
+    },
+    {
+      "id": "E-02",
+      "description": "Seed-Determinism Log",
+      "source_file": "seed_audit.log",
+      "status": "Verified"
+    },
+    {
+      "id": "E-03",
+      "description": "MC/DC Coverage Export",
+      "source_file": "coverage_matrix.csv",
+      "status": "Verified"
+    },
+    {
+      "id": "E-04",
+      "description": "Certification Data Package",
+      "source_file": "CDP_v1.0.zip",
+      "status": "Submitted"
+    }
+  ]
+}
