@@ -217,6 +217,7 @@ class Phase2Runtime:
         
     def _execute_with_hetero(self, tensors: List[Iterable[complex]]) -> list[complex]:
         """Execute with heterogeneous scheduling."""
+        tensors = list(tensors)
         workload_size = len(tensors) * sum(len(list(t)) for t in tensors) / 1e9
         
         # Schedule to best device
