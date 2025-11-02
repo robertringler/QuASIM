@@ -119,7 +119,7 @@ class Phase2Runtime:
             self.ir_builder.optimize()
             
         # Generate or retrieve cached kernel
-        kernel_code = self._get_or_compile_kernel(ir_graph)
+        self._get_or_compile_kernel(ir_graph)
         
         # Execute with heterogeneous scheduling
         result = self._execute_with_hetero(tensor_list)
