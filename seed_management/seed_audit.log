@@ -1,0 +1,823 @@
+{
+  "metadata": {
+    "audit_purpose": "Deterministic replay validation",
+    "standard_ref": "DO-178C \u00a76.4.4, NASA E-HBK-4008 \u00a76.5",
+    "generated_at": "2025-11-02T22:11:14.672014"
+  },
+  "validation_criteria": {
+    "max_drift_microseconds": 1.0,
+    "determinism_required": true,
+    "replay_environments": [
+      "env_dev",
+      "env_qa",
+      "env_prod"
+    ]
+  },
+  "results": {
+    "total_entries": 100,
+    "max_drift_observed": 0.7980300851960882,
+    "validation_passed": true
+  },
+  "entries": [
+    {
+      "seed_value": 1000,
+      "timestamp": "2025-11-02T22:11:14.671480",
+      "environment": "env_dev",
+      "replay_id": "replay_0000",
+      "determinism_validated": true,
+      "drift_microseconds": 0.511541438766307
+    },
+    {
+      "seed_value": 1001,
+      "timestamp": "2025-11-02T22:11:14.671501",
+      "environment": "env_qa",
+      "replay_id": "replay_0001",
+      "determinism_validated": true,
+      "drift_microseconds": 0.02000860417813355
+    },
+    {
+      "seed_value": 1002,
+      "timestamp": "2025-11-02T22:11:14.671510",
+      "environment": "env_prod",
+      "replay_id": "replay_0002",
+      "determinism_validated": true,
+      "drift_microseconds": 0.2200234546952954
+    },
+    {
+      "seed_value": 1003,
+      "timestamp": "2025-11-02T22:11:14.671516",
+      "environment": "env_dev",
+      "replay_id": "replay_0003",
+      "determinism_validated": true,
+      "drift_microseconds": 0.1785685905190582
+    },
+    {
+      "seed_value": 1004,
+      "timestamp": "2025-11-02T22:11:14.671521",
+      "environment": "env_qa",
+      "replay_id": "replay_0004",
+      "determinism_validated": true,
+      "drift_microseconds": 0.5891769713312099
+    },
+    {
+      "seed_value": 1005,
+      "timestamp": "2025-11-02T22:11:14.671526",
+      "environment": "env_prod",
+      "replay_id": "replay_0005",
+      "determinism_validated": true,
+      "drift_microseconds": 0.5413595899383291
+    },
+    {
+      "seed_value": 1006,
+      "timestamp": "2025-11-02T22:11:14.671531",
+      "environment": "env_dev",
+      "replay_id": "replay_0006",
+      "determinism_validated": true,
+      "drift_microseconds": 0.7137436541638764
+    },
+    {
+      "seed_value": 1007,
+      "timestamp": "2025-11-02T22:11:14.671536",
+      "environment": "env_qa",
+      "replay_id": "replay_0007",
+      "determinism_validated": true,
+      "drift_microseconds": 0.06955106610353293
+    },
+    {
+      "seed_value": 1008,
+      "timestamp": "2025-11-02T22:11:14.671540",
+      "environment": "env_prod",
+      "replay_id": "replay_0008",
+      "determinism_validated": true,
+      "drift_microseconds": 0.33753745574821636
+    },
+    {
+      "seed_value": 1009,
+      "timestamp": "2025-11-02T22:11:14.671570",
+      "environment": "env_dev",
+      "replay_id": "replay_0009",
+      "determinism_validated": true,
+      "drift_microseconds": 0.023837775550456276
+    },
+    {
+      "seed_value": 1010,
+      "timestamp": "2025-11-02T22:11:14.671582",
+      "environment": "env_qa",
+      "replay_id": "replay_0010",
+      "determinism_validated": true,
+      "drift_microseconds": 0.1749103798428827
+    },
+    {
+      "seed_value": 1011,
+      "timestamp": "2025-11-02T22:11:14.671590",
+      "environment": "env_prod",
+      "replay_id": "replay_0011",
+      "determinism_validated": true,
+      "drift_microseconds": 0.4042842304826899
+    },
+    {
+      "seed_value": 1012,
+      "timestamp": "2025-11-02T22:11:14.671598",
+      "environment": "env_dev",
+      "replay_id": "replay_0012",
+      "determinism_validated": true,
+      "drift_microseconds": 0.0212287757470909
+    },
+    {
+      "seed_value": 1013,
+      "timestamp": "2025-11-02T22:11:14.671607",
+      "environment": "env_qa",
+      "replay_id": "replay_0013",
+      "determinism_validated": true,
+      "drift_microseconds": 0.1590701205493188
+    },
+    {
+      "seed_value": 1014,
+      "timestamp": "2025-11-02T22:11:14.671612",
+      "environment": "env_prod",
+      "replay_id": "replay_0014",
+      "determinism_validated": true,
+      "drift_microseconds": 0.5199075502236186
+    },
+    {
+      "seed_value": 1015,
+      "timestamp": "2025-11-02T22:11:14.671617",
+      "environment": "env_dev",
+      "replay_id": "replay_0015",
+      "determinism_validated": true,
+      "drift_microseconds": 0.43595318448257336
+    },
+    {
+      "seed_value": 1016,
+      "timestamp": "2025-11-02T22:11:14.671621",
+      "environment": "env_qa",
+      "replay_id": "replay_0016",
+      "determinism_validated": true,
+      "drift_microseconds": 0.17635249763255736
+    },
+    {
+      "seed_value": 1017,
+      "timestamp": "2025-11-02T22:11:14.671626",
+      "environment": "env_prod",
+      "replay_id": "replay_0017",
+      "determinism_validated": true,
+      "drift_microseconds": 0.471412547100727
+    },
+    {
+      "seed_value": 1018,
+      "timestamp": "2025-11-02T22:11:14.671631",
+      "environment": "env_dev",
+      "replay_id": "replay_0018",
+      "determinism_validated": true,
+      "drift_microseconds": 0.6475443653422613
+    },
+    {
+      "seed_value": 1019,
+      "timestamp": "2025-11-02T22:11:14.671636",
+      "environment": "env_qa",
+      "replay_id": "replay_0019",
+      "determinism_validated": true,
+      "drift_microseconds": 0.005199007742448814
+    },
+    {
+      "seed_value": 1020,
+      "timestamp": "2025-11-02T22:11:14.671640",
+      "environment": "env_prod",
+      "replay_id": "replay_0020",
+      "determinism_validated": true,
+      "drift_microseconds": 0.6446554014662463
+    },
+    {
+      "seed_value": 1021,
+      "timestamp": "2025-11-02T22:11:14.671644",
+      "environment": "env_dev",
+      "replay_id": "replay_0021",
+      "determinism_validated": true,
+      "drift_microseconds": 0.5585115159905815
+    },
+    {
+      "seed_value": 1022,
+      "timestamp": "2025-11-02T22:11:14.671651",
+      "environment": "env_qa",
+      "replay_id": "replay_0022",
+      "determinism_validated": true,
+      "drift_microseconds": 0.27220041321439353
+    },
+    {
+      "seed_value": 1023,
+      "timestamp": "2025-11-02T22:11:14.671658",
+      "environment": "env_prod",
+      "replay_id": "replay_0023",
+      "determinism_validated": true,
+      "drift_microseconds": 0.12438359984942525
+    },
+    {
+      "seed_value": 1024,
+      "timestamp": "2025-11-02T22:11:14.671666",
+      "environment": "env_dev",
+      "replay_id": "replay_0024",
+      "determinism_validated": true,
+      "drift_microseconds": 0.765770457765425
+    },
+    {
+      "seed_value": 1025,
+      "timestamp": "2025-11-02T22:11:14.671673",
+      "environment": "env_qa",
+      "replay_id": "replay_0025",
+      "determinism_validated": true,
+      "drift_microseconds": 0.2692756360901014
+    },
+    {
+      "seed_value": 1026,
+      "timestamp": "2025-11-02T22:11:14.671682",
+      "environment": "env_prod",
+      "replay_id": "replay_0026",
+      "determinism_validated": true,
+      "drift_microseconds": 0.07419667470411832
+    },
+    {
+      "seed_value": 1027,
+      "timestamp": "2025-11-02T22:11:14.671690",
+      "environment": "env_dev",
+      "replay_id": "replay_0027",
+      "determinism_validated": true,
+      "drift_microseconds": 0.07737310146677122
+    },
+    {
+      "seed_value": 1028,
+      "timestamp": "2025-11-02T22:11:14.671697",
+      "environment": "env_qa",
+      "replay_id": "replay_0028",
+      "determinism_validated": true,
+      "drift_microseconds": 0.6779954930779679
+    },
+    {
+      "seed_value": 1029,
+      "timestamp": "2025-11-02T22:11:14.671704",
+      "environment": "env_prod",
+      "replay_id": "replay_0029",
+      "determinism_validated": true,
+      "drift_microseconds": 0.48298082509351287
+    },
+    {
+      "seed_value": 1030,
+      "timestamp": "2025-11-02T22:11:14.671711",
+      "environment": "env_dev",
+      "replay_id": "replay_0030",
+      "determinism_validated": true,
+      "drift_microseconds": 0.6457026186195042
+    },
+    {
+      "seed_value": 1031,
+      "timestamp": "2025-11-02T22:11:14.671717",
+      "environment": "env_qa",
+      "replay_id": "replay_0031",
+      "determinism_validated": true,
+      "drift_microseconds": 0.5837854293550543
+    },
+    {
+      "seed_value": 1032,
+      "timestamp": "2025-11-02T22:11:14.671724",
+      "environment": "env_prod",
+      "replay_id": "replay_0032",
+      "determinism_validated": true,
+      "drift_microseconds": 0.4289824731637606
+    },
+    {
+      "seed_value": 1033,
+      "timestamp": "2025-11-02T22:11:14.671731",
+      "environment": "env_dev",
+      "replay_id": "replay_0033",
+      "determinism_validated": true,
+      "drift_microseconds": 0.7784926111834966
+    },
+    {
+      "seed_value": 1034,
+      "timestamp": "2025-11-02T22:11:14.671739",
+      "environment": "env_qa",
+      "replay_id": "replay_0034",
+      "determinism_validated": true,
+      "drift_microseconds": 0.3028275017666828
+    },
+    {
+      "seed_value": 1035,
+      "timestamp": "2025-11-02T22:11:14.671747",
+      "environment": "env_prod",
+      "replay_id": "replay_0035",
+      "determinism_validated": true,
+      "drift_microseconds": 0.44163250501858164
+    },
+    {
+      "seed_value": 1036,
+      "timestamp": "2025-11-02T22:11:14.671751",
+      "environment": "env_dev",
+      "replay_id": "replay_0036",
+      "determinism_validated": true,
+      "drift_microseconds": 0.663523731402396
+    },
+    {
+      "seed_value": 1037,
+      "timestamp": "2025-11-02T22:11:14.671755",
+      "environment": "env_qa",
+      "replay_id": "replay_0037",
+      "determinism_validated": true,
+      "drift_microseconds": 0.49481580189139684
+    },
+    {
+      "seed_value": 1038,
+      "timestamp": "2025-11-02T22:11:14.671759",
+      "environment": "env_prod",
+      "replay_id": "replay_0038",
+      "determinism_validated": true,
+      "drift_microseconds": 0.6893655202486219
+    },
+    {
+      "seed_value": 1039,
+      "timestamp": "2025-11-02T22:11:14.671763",
+      "environment": "env_dev",
+      "replay_id": "replay_0039",
+      "determinism_validated": true,
+      "drift_microseconds": 0.46188171620540963
+    },
+    {
+      "seed_value": 1040,
+      "timestamp": "2025-11-02T22:11:14.671767",
+      "environment": "env_qa",
+      "replay_id": "replay_0040",
+      "determinism_validated": true,
+      "drift_microseconds": 0.5636574689719388
+    },
+    {
+      "seed_value": 1041,
+      "timestamp": "2025-11-02T22:11:14.671772",
+      "environment": "env_prod",
+      "replay_id": "replay_0041",
+      "determinism_validated": true,
+      "drift_microseconds": 0.036659506924529774
+    },
+    {
+      "seed_value": 1042,
+      "timestamp": "2025-11-02T22:11:14.671776",
+      "environment": "env_dev",
+      "replay_id": "replay_0042",
+      "determinism_validated": true,
+      "drift_microseconds": 0.18231862052123748
+    },
+    {
+      "seed_value": 1043,
+      "timestamp": "2025-11-02T22:11:14.671780",
+      "environment": "env_qa",
+      "replay_id": "replay_0043",
+      "determinism_validated": true,
+      "drift_microseconds": 0.23151037088168575
+    },
+    {
+      "seed_value": 1044,
+      "timestamp": "2025-11-02T22:11:14.671784",
+      "environment": "env_prod",
+      "replay_id": "replay_0044",
+      "determinism_validated": true,
+      "drift_microseconds": 0.06383358153890199
+    },
+    {
+      "seed_value": 1045,
+      "timestamp": "2025-11-02T22:11:14.671788",
+      "environment": "env_dev",
+      "replay_id": "replay_0045",
+      "determinism_validated": true,
+      "drift_microseconds": 0.18623270908882417
+    },
+    {
+      "seed_value": 1046,
+      "timestamp": "2025-11-02T22:11:14.671792",
+      "environment": "env_qa",
+      "replay_id": "replay_0046",
+      "determinism_validated": true,
+      "drift_microseconds": 0.0808011435277833
+    },
+    {
+      "seed_value": 1047,
+      "timestamp": "2025-11-02T22:11:14.671796",
+      "environment": "env_prod",
+      "replay_id": "replay_0047",
+      "determinism_validated": true,
+      "drift_microseconds": 0.2223788824880737
+    },
+    {
+      "seed_value": 1048,
+      "timestamp": "2025-11-02T22:11:14.671800",
+      "environment": "env_dev",
+      "replay_id": "replay_0048",
+      "determinism_validated": true,
+      "drift_microseconds": 0.5085475554115202
+    },
+    {
+      "seed_value": 1049,
+      "timestamp": "2025-11-02T22:11:14.671804",
+      "environment": "env_qa",
+      "replay_id": "replay_0049",
+      "determinism_validated": true,
+      "drift_microseconds": 0.2918657431760674
+    },
+    {
+      "seed_value": 1050,
+      "timestamp": "2025-11-02T22:11:14.671807",
+      "environment": "env_prod",
+      "replay_id": "replay_0050",
+      "determinism_validated": true,
+      "drift_microseconds": 0.2961447736935061
+    },
+    {
+      "seed_value": 1051,
+      "timestamp": "2025-11-02T22:11:14.671811",
+      "environment": "env_dev",
+      "replay_id": "replay_0051",
+      "determinism_validated": true,
+      "drift_microseconds": 0.16760562461719017
+    },
+    {
+      "seed_value": 1052,
+      "timestamp": "2025-11-02T22:11:14.671815",
+      "environment": "env_qa",
+      "replay_id": "replay_0052",
+      "determinism_validated": true,
+      "drift_microseconds": 0.2135822576392907
+    },
+    {
+      "seed_value": 1053,
+      "timestamp": "2025-11-02T22:11:14.671820",
+      "environment": "env_prod",
+      "replay_id": "replay_0053",
+      "determinism_validated": true,
+      "drift_microseconds": 0.7493236701699952
+    },
+    {
+      "seed_value": 1054,
+      "timestamp": "2025-11-02T22:11:14.671824",
+      "environment": "env_dev",
+      "replay_id": "replay_0054",
+      "determinism_validated": true,
+      "drift_microseconds": 0.5184283081972748
+    },
+    {
+      "seed_value": 1055,
+      "timestamp": "2025-11-02T22:11:14.671828",
+      "environment": "env_qa",
+      "replay_id": "replay_0055",
+      "determinism_validated": true,
+      "drift_microseconds": 0.4873048045335906
+    },
+    {
+      "seed_value": 1056,
+      "timestamp": "2025-11-02T22:11:14.671832",
+      "environment": "env_prod",
+      "replay_id": "replay_0056",
+      "determinism_validated": true,
+      "drift_microseconds": 0.1369109185584776
+    },
+    {
+      "seed_value": 1057,
+      "timestamp": "2025-11-02T22:11:14.671836",
+      "environment": "env_dev",
+      "replay_id": "replay_0057",
+      "determinism_validated": true,
+      "drift_microseconds": 0.5833014383602794
+    },
+    {
+      "seed_value": 1058,
+      "timestamp": "2025-11-02T22:11:14.671840",
+      "environment": "env_qa",
+      "replay_id": "replay_0058",
+      "determinism_validated": true,
+      "drift_microseconds": 0.1307219950095427
+    },
+    {
+      "seed_value": 1059,
+      "timestamp": "2025-11-02T22:11:14.671844",
+      "environment": "env_prod",
+      "replay_id": "replay_0059",
+      "determinism_validated": true,
+      "drift_microseconds": 0.30356435340611826
+    },
+    {
+      "seed_value": 1060,
+      "timestamp": "2025-11-02T22:11:14.671848",
+      "environment": "env_dev",
+      "replay_id": "replay_0060",
+      "determinism_validated": true,
+      "drift_microseconds": 0.7916186805092762
+    },
+    {
+      "seed_value": 1061,
+      "timestamp": "2025-11-02T22:11:14.671852",
+      "environment": "env_qa",
+      "replay_id": "replay_0061",
+      "determinism_validated": true,
+      "drift_microseconds": 0.5119998078832743
+    },
+    {
+      "seed_value": 1062,
+      "timestamp": "2025-11-02T22:11:14.671856",
+      "environment": "env_prod",
+      "replay_id": "replay_0062",
+      "determinism_validated": true,
+      "drift_microseconds": 0.445559795019717
+    },
+    {
+      "seed_value": 1063,
+      "timestamp": "2025-11-02T22:11:14.671860",
+      "environment": "env_dev",
+      "replay_id": "replay_0063",
+      "determinism_validated": true,
+      "drift_microseconds": 0.5476914007918997
+    },
+    {
+      "seed_value": 1064,
+      "timestamp": "2025-11-02T22:11:14.671864",
+      "environment": "env_qa",
+      "replay_id": "replay_0064",
+      "determinism_validated": true,
+      "drift_microseconds": 0.6742815361518477
+    },
+    {
+      "seed_value": 1065,
+      "timestamp": "2025-11-02T22:11:14.671868",
+      "environment": "env_prod",
+      "replay_id": "replay_0065",
+      "determinism_validated": true,
+      "drift_microseconds": 0.6207999292369959
+    },
+    {
+      "seed_value": 1066,
+      "timestamp": "2025-11-02T22:11:14.671872",
+      "environment": "env_dev",
+      "replay_id": "replay_0066",
+      "determinism_validated": true,
+      "drift_microseconds": 0.18323845757128351
+    },
+    {
+      "seed_value": 1067,
+      "timestamp": "2025-11-02T22:11:14.671876",
+      "environment": "env_qa",
+      "replay_id": "replay_0067",
+      "determinism_validated": true,
+      "drift_microseconds": 0.02568019512323021
+    },
+    {
+      "seed_value": 1068,
+      "timestamp": "2025-11-02T22:11:14.671880",
+      "environment": "env_prod",
+      "replay_id": "replay_0068",
+      "determinism_validated": true,
+      "drift_microseconds": 0.2523624384472655
+    },
+    {
+      "seed_value": 1069,
+      "timestamp": "2025-11-02T22:11:14.671885",
+      "environment": "env_dev",
+      "replay_id": "replay_0069",
+      "determinism_validated": true,
+      "drift_microseconds": 0.21419270078056218
+    },
+    {
+      "seed_value": 1070,
+      "timestamp": "2025-11-02T22:11:14.671889",
+      "environment": "env_qa",
+      "replay_id": "replay_0070",
+      "determinism_validated": true,
+      "drift_microseconds": 0.16878627486906117
+    },
+    {
+      "seed_value": 1071,
+      "timestamp": "2025-11-02T22:11:14.671893",
+      "environment": "env_prod",
+      "replay_id": "replay_0071",
+      "determinism_validated": true,
+      "drift_microseconds": 0.7543277714680436
+    },
+    {
+      "seed_value": 1072,
+      "timestamp": "2025-11-02T22:11:14.671897",
+      "environment": "env_dev",
+      "replay_id": "replay_0072",
+      "determinism_validated": true,
+      "drift_microseconds": 0.7010941011781351
+    },
+    {
+      "seed_value": 1073,
+      "timestamp": "2025-11-02T22:11:14.671901",
+      "environment": "env_qa",
+      "replay_id": "replay_0073",
+      "determinism_validated": true,
+      "drift_microseconds": 0.25174230463878233
+    },
+    {
+      "seed_value": 1074,
+      "timestamp": "2025-11-02T22:11:14.671905",
+      "environment": "env_prod",
+      "replay_id": "replay_0074",
+      "determinism_validated": true,
+      "drift_microseconds": 0.524350932235904
+    },
+    {
+      "seed_value": 1075,
+      "timestamp": "2025-11-02T22:11:14.671909",
+      "environment": "env_dev",
+      "replay_id": "replay_0075",
+      "determinism_validated": true,
+      "drift_microseconds": 0.31650552084853145
+    },
+    {
+      "seed_value": 1076,
+      "timestamp": "2025-11-02T22:11:14.671913",
+      "environment": "env_qa",
+      "replay_id": "replay_0076",
+      "determinism_validated": true,
+      "drift_microseconds": 0.7316380717924349
+    },
+    {
+      "seed_value": 1077,
+      "timestamp": "2025-11-02T22:11:14.671917",
+      "environment": "env_prod",
+      "replay_id": "replay_0077",
+      "determinism_validated": true,
+      "drift_microseconds": 0.3670814820699191
+    },
+    {
+      "seed_value": 1078,
+      "timestamp": "2025-11-02T22:11:14.671921",
+      "environment": "env_dev",
+      "replay_id": "replay_0078",
+      "determinism_validated": true,
+      "drift_microseconds": 0.21190413319844198
+    },
+    {
+      "seed_value": 1079,
+      "timestamp": "2025-11-02T22:11:14.671925",
+      "environment": "env_qa",
+      "replay_id": "replay_0079",
+      "determinism_validated": true,
+      "drift_microseconds": 0.19730200615518678
+    },
+    {
+      "seed_value": 1080,
+      "timestamp": "2025-11-02T22:11:14.671929",
+      "environment": "env_prod",
+      "replay_id": "replay_0080",
+      "determinism_validated": true,
+      "drift_microseconds": 0.44909450733052064
+    },
+    {
+      "seed_value": 1081,
+      "timestamp": "2025-11-02T22:11:14.671933",
+      "environment": "env_dev",
+      "replay_id": "replay_0081",
+      "determinism_validated": true,
+      "drift_microseconds": 0.21019328681834823
+    },
+    {
+      "seed_value": 1082,
+      "timestamp": "2025-11-02T22:11:14.671937",
+      "environment": "env_qa",
+      "replay_id": "replay_0082",
+      "determinism_validated": true,
+      "drift_microseconds": 0.46766879217883245
+    },
+    {
+      "seed_value": 1083,
+      "timestamp": "2025-11-02T22:11:14.671941",
+      "environment": "env_prod",
+      "replay_id": "replay_0083",
+      "determinism_validated": true,
+      "drift_microseconds": 0.7182583068819817
+    },
+    {
+      "seed_value": 1084,
+      "timestamp": "2025-11-02T22:11:14.671945",
+      "environment": "env_dev",
+      "replay_id": "replay_0084",
+      "determinism_validated": true,
+      "drift_microseconds": 0.31952040411231786
+    },
+    {
+      "seed_value": 1085,
+      "timestamp": "2025-11-02T22:11:14.671949",
+      "environment": "env_qa",
+      "replay_id": "replay_0085",
+      "determinism_validated": true,
+      "drift_microseconds": 0.17545660732582669
+    },
+    {
+      "seed_value": 1086,
+      "timestamp": "2025-11-02T22:11:14.671953",
+      "environment": "env_prod",
+      "replay_id": "replay_0086",
+      "determinism_validated": true,
+      "drift_microseconds": 0.7980300851960882
+    },
+    {
+      "seed_value": 1087,
+      "timestamp": "2025-11-02T22:11:14.671957",
+      "environment": "env_dev",
+      "replay_id": "replay_0087",
+      "determinism_validated": true,
+      "drift_microseconds": 0.40762103494117163
+    },
+    {
+      "seed_value": 1088,
+      "timestamp": "2025-11-02T22:11:14.671961",
+      "environment": "env_qa",
+      "replay_id": "replay_0088",
+      "determinism_validated": true,
+      "drift_microseconds": 0.07272752973903511
+    },
+    {
+      "seed_value": 1089,
+      "timestamp": "2025-11-02T22:11:14.671965",
+      "environment": "env_prod",
+      "replay_id": "replay_0089",
+      "determinism_validated": true,
+      "drift_microseconds": 0.03769310033978766
+    },
+    {
+      "seed_value": 1090,
+      "timestamp": "2025-11-02T22:11:14.671969",
+      "environment": "env_dev",
+      "replay_id": "replay_0090",
+      "determinism_validated": true,
+      "drift_microseconds": 0.08771930428052732
+    },
+    {
+      "seed_value": 1091,
+      "timestamp": "2025-11-02T22:11:14.671973",
+      "environment": "env_qa",
+      "replay_id": "replay_0091",
+      "determinism_validated": true,
+      "drift_microseconds": 0.5019568333624721
+    },
+    {
+      "seed_value": 1092,
+      "timestamp": "2025-11-02T22:11:14.671977",
+      "environment": "env_prod",
+      "replay_id": "replay_0092",
+      "determinism_validated": true,
+      "drift_microseconds": 0.6336634914903714
+    },
+    {
+      "seed_value": 1093,
+      "timestamp": "2025-11-02T22:11:14.671981",
+      "environment": "env_dev",
+      "replay_id": "replay_0093",
+      "determinism_validated": true,
+      "drift_microseconds": 0.33772797343974725
+    },
+    {
+      "seed_value": 1094,
+      "timestamp": "2025-11-02T22:11:14.671985",
+      "environment": "env_qa",
+      "replay_id": "replay_0094",
+      "determinism_validated": true,
+      "drift_microseconds": 0.05082216492156571
+    },
+    {
+      "seed_value": 1095,
+      "timestamp": "2025-11-02T22:11:14.671989",
+      "environment": "env_prod",
+      "replay_id": "replay_0095",
+      "determinism_validated": true,
+      "drift_microseconds": 0.30529542920522945
+    },
+    {
+      "seed_value": 1096,
+      "timestamp": "2025-11-02T22:11:14.671993",
+      "environment": "env_dev",
+      "replay_id": "replay_0096",
+      "determinism_validated": true,
+      "drift_microseconds": 0.7968971041920775
+    },
+    {
+      "seed_value": 1097,
+      "timestamp": "2025-11-02T22:11:14.671997",
+      "environment": "env_qa",
+      "replay_id": "replay_0097",
+      "determinism_validated": true,
+      "drift_microseconds": 0.4232914760793096
+    },
+    {
+      "seed_value": 1098,
+      "timestamp": "2025-11-02T22:11:14.672005",
+      "environment": "env_prod",
+      "replay_id": "replay_0098",
+      "determinism_validated": true,
+      "drift_microseconds": 0.7768627020908946
+    },
+    {
+      "seed_value": 1099,
+      "timestamp": "2025-11-02T22:11:14.672010",
+      "environment": "env_dev",
+      "replay_id": "replay_0099",
+      "determinism_validated": true,
+      "drift_microseconds": 0.6886237617875985
+    }
+  ]
+}
