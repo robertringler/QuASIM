@@ -72,16 +72,48 @@ class IRBuilder:
         """Fuse consecutive elementwise operations."""
         fusable_ops = {"add", "mul", "sub", "div", "relu", "tanh"}
         fused_nodes: List[IRNode] = []
-        
+        replaced = set()
+
         for node in self.nodes:
+            # Skip nodes that have already been fused
+            if node in replaced:
+                continue
             if node.op in fusable_ops and len(node.inputs) == 1:
                 parent = node.inputs[0]
-                if parent.op in fusable_ops and len(parent.outputs) == 1:
-                    # Fuse operations
-                    node.metadata["fused_from"] = [parent.op, node.op]
+                if (
+                    parent.op in fusable_ops
+                    and len(parent.outputs) == 1
+                    and parent not in replaced
+                ):
+                    # Create a new fused node
+                    fused_op = f"{parent.op}_{node.op}"
+                    fused_metadata = dict(parent.metadata)
+                    fused_metadata.update(node.metadata)
+                    fused_metadata["fused_from"] = [parent.op, node.op]
+                    fused_node = IRNode(
+                        op=fused_op,
+                        inputs=parent.inputs,
+                        dtype=node.dtype,
+                        shape=node.shape,
+                        metadata=fused_metadata,
+                    )
+                    # Update outputs of parent.inputs to point to fused_node
+                    for inp in parent.inputs:
+                        inp.outputs = [
+                            fused_node if out is parent else out for out in inp.outputs
+                        ]
+                    # Update outputs of fused_node
+                    fused_node.outputs = node.outputs.copy()
+                    # Update inputs of node.outputs to point to fused_node
+                    for out in node.outputs:
+                        out.inputs = [
+                            fused_node if inp is node else inp for inp in out.inputs
+                        ]
+                    fused_nodes.append(fused_node)
+                    replaced.add(parent)
+                    replaced.add(node)
                     continue
             fused_nodes.append(node)
-            
         self.nodes = fused_nodes
         
     def to_mlir(self) -> str:
