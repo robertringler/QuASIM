@@ -27,8 +27,8 @@ export NCCL_SOCKET_IFNAME=ib0
 export TORCH_DISTRIBUTED_DEBUG=DETAIL
 export TORCH_SHOW_CPP_STACKTRACES=1
 
-# Python path
-export PYTHONPATH="${PYTHONPATH}:/path/to/sybernix"
+# Python path - set to your sybernix installation directory
+export PYTHONPATH="${PYTHONPATH}:${SLURM_SUBMIT_DIR}"
 
 # Master node info
 MASTER_ADDR=$(scontrol show hostname $SLURM_NODELIST | head -n 1)
@@ -41,48 +41,13 @@ echo "Total ranks: $((SLURM_NNODES * 8))"
 echo "Master: $MASTER_ADDR:$MASTER_PORT"
 
 # Launch with torchrun on each node
+# Calls the distributed PyTorch script
 srun torchrun \
     --nnodes=$SLURM_NNODES \
     --nproc_per_node=8 \
     --rdzv_id=$SLURM_JOB_ID \
     --rdzv_backend=c10d \
     --rdzv_endpoint=$MASTER_ADDR:$MASTER_PORT \
-    << EOF
-import os
-import torch
-import torch.distributed as dist
-from quasim.qc.quasim_dist import init_cluster, shard_state, profile, initialize_zero_state
-
-# Initialize distributed context
-print(f"Rank {os.environ.get('RANK', 0)}: Initializing PyTorch cluster...")
-ctx = init_cluster(backend="torch", mesh_shape=(32, 1), seed=12345)
-
-if ctx.global_rank == 0:
-    print(f"Cluster initialized: {ctx.world_size} ranks")
-    print(f"Mesh shape: {ctx.mesh_shape}")
-    print(f"Device: {ctx.device}")
-
-# Create and shard state
-num_qubits = 30
-if ctx.global_rank == 0:
-    print(f"Creating {num_qubits}-qubit state...")
-
-psi0 = initialize_zero_state(num_qubits=num_qubits, dtype="complex64")
-S = shard_state(ctx, psi0)
-
-if ctx.global_rank == 0:
-    print(f"State sharded: global shape {S.global_shape}")
-
-# Synchronize all ranks
-if dist.is_initialized():
-    dist.barrier()
-
-# Profile
-if ctx.global_rank == 0:
-    prof = profile(ctx)
-    print(f"Profile: {prof}")
-    print("Simulation complete!")
-
-EOF
+    python3 quasim/qc/run_distributed_torch.py
 
 echo "Job completed at $(date)"
