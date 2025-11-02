@@ -92,7 +92,7 @@ redis:
   architecture: standalone
   auth:
     enabled: true
-    password: "changeme"
+    password: ""  # REQUIRED: Set via Helm values or external secret manager
   master:
     persistence:
       enabled: true
@@ -103,7 +103,7 @@ postgresql:
   enabled: true
   auth:
     username: quasim
-    password: "changeme"
+    password: ""  # REQUIRED: Set via Helm values or external secret manager
     database: quasim
   primary:
     persistence:

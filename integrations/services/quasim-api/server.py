@@ -144,9 +144,12 @@ def create_app() -> Any:
     )
     
     # CORS middleware
+    # In production, configure allowed origins via environment variables
+    import os
+    allowed_origins = os.getenv("CORS_ORIGINS", "http://localhost:3000").split(",")
     app.add_middleware(
         CORSMiddleware,
-        allow_origins=["*"],  # Configure appropriately in production
+        allow_origins=allowed_origins,
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"],
@@ -189,8 +192,15 @@ def create_app() -> Any:
         Returns:
             Job submission response with job ID
         """
-        # In production, validate API key
+        # In production, validate API key against stored keys
         if x_api_key:
+            # TODO: Implement proper API key validation
+            # For now, reject if key is provided but empty
+            if not x_api_key.strip():
+                raise HTTPException(
+                    status_code=status.HTTP_401_UNAUTHORIZED,
+                    detail="Invalid API key"
+                )
             logger.info(f"Request authenticated with API key")
         
         job_id = str(uuid.uuid4())
