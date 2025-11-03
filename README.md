@@ -10,13 +10,14 @@ To quickly run the full QuASIM Autonomous Systems platform locally:
 docker compose up --build
 ```
 
-Visit http://localhost:8080 for the dashboard and http://localhost:8000 for the API.
+Visit <http://localhost:8080> for the dashboard and <http://localhost:8000> for the API.
 
 See [QUICKSTART.md](QUICKSTART.md) for detailed instructions.
 
 ## Overview
 
 Sybernix delivers a production-ready infrastructure that integrates:
+
 - **Quantum Simulation Runtime**: Hardware-accelerated tensor network contraction with cuQuantum integration
 - **Hybrid AI/Quantum Orchestration**: Seamless JAX and PyTorch integration for classical-quantum workflows
 - **Enterprise Kubernetes Platform**: GPU-accelerated EKS clusters with comprehensive observability
@@ -26,18 +27,21 @@ Sybernix delivers a production-ready infrastructure that integrates:
 ## Core Capabilities
 
 ### 1. Quantum Circuit Simulation
+
 - **Tensor Network Acceleration**: GPU-optimized contraction engines for quantum state simulation
 - **Hybrid Classical-Quantum Processing**: NVLink-C2C fabric enables coherent memory sharing between Grace CPU and Blackwell GPU clusters
 - **Noise Modeling**: Proprietary decoherence attenuation algorithms for realistic quantum behavior
 - **Scalability**: Distributed simulation across multi-GPU clusters with Kubernetes orchestration
 
 ### 2. AI-Powered Digital Twins
+
 - **Real-Time Inference**: SuperTransformer layers with quantum-inspired optimization
 - **Attractor Dynamics**: Advanced CFT (Conformal Field Theory) kernels for phase space analysis
 - **Scenario Planning**: Monte Carlo simulation with quantum speedup for risk assessment
 - **ONNX Integration**: Import existing digital twin models for quantum enhancement
 
 ### 3. Enterprise Infrastructure
+
 - **Production-Ready EKS**: Fully automated Terraform provisioning with GPU node groups
 - **GitOps Automation**: ArgoCD app-of-apps pattern for declarative platform management
 - **Observability Stack**: Prometheus, Grafana, Loki, and Tempo for metrics, logs, and traces
@@ -45,12 +49,14 @@ Sybernix delivers a production-ready infrastructure that integrates:
 - **Multi-Tenancy**: Namespace isolation with RBAC and network policies via Cilium CNI
 
 ### 4. Developer Experience
+
 - **Python SDK**: High-level `quasim` module with context managers and numpy integration
 - **C++ Runtime**: Low-level `libquasim` for performance-critical tensor operations
 - **API Compatibility**: CUDA 12.x API parity for seamless migration from NVIDIA stacks
 - **Benchmarking Suite**: Comprehensive performance validation across quantum and classical workloads
 
 ### 5. Visualization & Analytics
+
 - **Interactive Dashboards**: Plotly-based real-time visualization across distributed clusters
 - **Observable Estimates**: Streaming quantum measurement results with statistical aggregation
 - **Market Valuation Models**: Built-in financial modeling for technology assessment and ROI analysis
@@ -81,21 +87,25 @@ This guide brings up a production-ready EKS cluster with GPU node groups and ins
 ## Target Industries & Use Cases
 
 ### Aerospace & Defense
+
 - **Mission Planning**: Quantum-optimized trajectory calculations with real-time constraint solving
 - **Digital Twins**: High-fidelity aircraft system simulation with quantum noise modeling
 - **Supply Chain Optimization**: Quantum annealing for logistics and resource allocation
 
 ### Pharmaceutical & Life Sciences
+
 - **Molecular Simulation**: Quantum chemistry calculations for drug discovery pipelines
 - **Clinical Trial Optimization**: Quantum-enhanced statistical modeling for patient cohort selection
 - **Regulatory Compliance**: Immutable audit trails and data custody controls
 
 ### Financial Services
+
 - **Portfolio Optimization**: Quantum algorithms for mean-variance optimization at scale
 - **Risk Assessment**: Monte Carlo simulation with quantum amplitude estimation speedup
 - **Fraud Detection**: Quantum-inspired anomaly detection in transaction streams
 
 ### Manufacturing & Industrial IoT
+
 - **Predictive Maintenance**: Digital twin simulation with quantum sensor fusion
 - **Process Optimization**: Quantum optimization for production scheduling and energy efficiency
 - **Quality Control**: Real-time defect prediction with quantum machine learning
@@ -105,17 +115,21 @@ This guide brings up a production-ready EKS cluster with GPU node groups and ins
 Sybernix occupies a unique position between quantum SDK platforms (IBM Qiskit, Google Quantum AI) and enterprise visualization tools (NVIDIA Omniverse, Epic Unreal Engine), delivering an integrated quantum-classical simulation stack for operational digital twins.
 
 **Key Differentiators**:
+
 - **0.85 Tech Moat Index**: Composite score reflecting architectural maturity, quantum model libraries, partner ecosystem, and regulatory compliance (improved from 0.81 with enhanced capabilities)
 - **Hybrid Runtime**: Seamless JAX/PyTorch orchestration with quantum circuit integration
 - **Production-Grade Infrastructure**: Battle-tested Kubernetes platform with GPU acceleration and comprehensive observability
 - **Regulatory Readiness**: SOC2/ISO 27001 compliance frameworks built-in
 
 ## Prereqs
+
 - Terraform ≥ 1.7, kubectl ≥ 1.29, helm ≥ 3.14, aws CLI configured
 - Route53 hosted zone (or external DNS option), ACM for public certs (optional)
 
 ## Quick Start
+
 1) **Provision VPC+EKS**
+
 ```bash
 cd infra/terraform/eks
 terraform init && terraform apply -var-file=prod.tfvars
@@ -140,9 +154,9 @@ kubectl apply -n argocd -f ../../helm/argocd-apps/app-of-apps.yaml
 
 4. **Verify**
 
-* `kubectl -n monitoring get pods` → Prometheus/Grafana up
-* `kubectl -n core get pods` → Cilium ready, cert-manager ready
-* `kubectl -n security get pods` → Gatekeeper/Vault ready
+- `kubectl -n monitoring get pods` → Prometheus/Grafana up
+- `kubectl -n core get pods` → Cilium ready, cert-manager ready
+- `kubectl -n security get pods` → Gatekeeper/Vault ready
 
 ## Validation & Testing
 
@@ -165,6 +179,7 @@ We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guid
 ### Code Quality Standards
 
 The repository enforces code quality through automated workflows:
+
 - **Formatting**: black (Python), prettier (JS/TS), cargo fmt (Rust), go fmt (Go)
 - **Linting**: ruff (Python), eslint (JS/TS), clippy (Rust), golangci-lint (Go)
 - **Type checking**: mypy (Python when types are present)
@@ -174,11 +189,11 @@ All pull requests must pass CI checks before merging. See [SECURITY.md](SECURITY
 
 ## Namespaces
 
-* `core`: CNI, cert-manager, ingress
-* `mlops`: pipelines, registries (later stages)
-* `inference`: KServe/Triton/vLLM (later stages)
-* `monitoring`: Prometheus/Grafana/Loki/Tempo
-* `security`: Vault, Gatekeeper
+- `core`: CNI, cert-manager, ingress
+- `mlops`: pipelines, registries (later stages)
+- `inference`: KServe/Triton/vLLM (later stages)
+- `monitoring`: Prometheus/Grafana/Loki/Tempo
+- `security`: Vault, Gatekeeper
 
 ## GPU Scheduling
 
@@ -276,11 +291,13 @@ The ONERA M6 benchmark configurations are available in `QuASIM/onera/`:
 ### Build Requirements
 
 **Minimum (CPU Fallback):**
+
 - CMake 3.18+
 - C++20 compatible compiler
 - Python 3.8+
 
 **Full HPC Build:**
+
 - CMake 3.25+
 - CUDA Toolkit 12.4+
 - pybind11
