@@ -21,7 +21,7 @@ jobs:
       - uses: actions/checkout@v4
       - id: detect
         run: |
-          has_python=$([ -f pyproject.toml ] || [ -f requirements.txt ] || [ -f setup.py ] || ls -1 **/*.py >/dev/null 2>&1 && echo true || echo false)
+          has_python=$([ -f pyproject.toml ] || [ -f requirements.txt ] || [ -f setup.py ] || find . -name '*.py' -type f -print -quit | grep -q . && echo true || echo false)
           has_node=$([ -f package.json ] && echo true || echo false)
           has_go=$([ -f go.mod ] && echo true || echo false)
           has_rust=$([ -f Cargo.toml ] && echo true || echo false)
@@ -62,7 +62,7 @@ jobs:
       
       - name: Run mypy type checker
         run: |
-          if ls -1 **/*.py >/dev/null 2>&1; then
+          if find . -name '*.py' -type f -print -quit | grep -q .; then
             mypy --ignore-missing-imports . || true
           fi
 

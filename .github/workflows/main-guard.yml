@@ -28,7 +28,7 @@ jobs:
           ok=0
           
           # Python checks
-          if ls -1 **/*.py >/dev/null 2>&1; then
+          if find . -name '*.py' -type f -print -quit | grep -q .; then
             echo "Running Python health checks..."
             pip install --upgrade pip black ruff pytest || true
             
@@ -95,11 +95,14 @@ jobs:
                 // Branch doesn't exist, continue
               }
               
-              // Get current main ref
+              // Detect the default branch name (main or master)
+              const defaultBranch = context.ref.replace('refs/heads/', '');
+              
+              // Get current default branch ref
               const { data: baseRef } = await github.rest.git.getRef({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                ref: "heads/main"
+                ref: `heads/${defaultBranch}`
               });
               
               // Create branch
@@ -148,7 +151,7 @@ jobs:
                 repo: context.repo.repo,
                 title,
                 head: branch,
-                base: "main",
+                base: defaultBranch,
                 body
               });
               

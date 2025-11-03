@@ -48,7 +48,7 @@ jobs:
       # Auto-format / lint (non-destructive)
       - name: Python format & lint
         run: |
-          if ls -1 **/*.py >/dev/null 2>&1; then
+          if find . -name '*.py' -type f -print -quit | grep -q .; then
             echo "Running black formatter..."
             black . || true
             echo "Running ruff linter with auto-fix..."
@@ -79,7 +79,7 @@ jobs:
             echo "Running cargo fmt..."
             cargo fmt || true
             echo "Running cargo clippy with auto-fix..."
-            cargo clippy --fix -Z unstable-options --allow-dirty || true
+            cargo clippy --fix --allow-dirty || true
           fi
       
       - name: Markdown lint
