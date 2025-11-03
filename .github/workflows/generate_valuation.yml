@@ -1,0 +1,57 @@
+name: Generate Market Valuation (Nightly)
+
+on:
+  schedule:
+    - cron: "0 3 * * *"   # Runs nightly at 3:00 AM UTC
+  workflow_dispatch:      # Allows manual trigger as well
+
+permissions:
+  contents: write
+
+jobs:
+  generate-valuation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Generate Market Valuation Section
+        run: |
+          echo "Generating Market Valuation section for QuASIM..."
+          python3 scripts/generate_market_valuation.py
+
+      - name: Check for changes
+        id: git-check
+        run: |
+          if [ ! -f docs/market_valuation.md ]; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+          else
+            git diff --exit-code docs/market_valuation.md || echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Commit and push results
+        if: steps.git-check.outputs.changed == 'true'
+        run: |
+          git config --global user.name "QuASIM AutoBot"
+          git config --global user.email "autobot@quasim.ai"
+          git add docs/market_valuation.md
+          git commit -m "Auto-update: nightly market valuation report [$(date +'%Y-%m-%d')]"
+          git push
+
+      - name: Report completion
+        if: steps.git-check.outputs.changed == 'true'
+        run: |
+          echo "✓ Market valuation section has been updated and pushed successfully"
+          
+      - name: Report no changes
+        if: steps.git-check.outputs.changed != 'true'
+        run: |
+          echo "ℹ No changes detected in market valuation section"
