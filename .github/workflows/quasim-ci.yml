@@ -1,0 +1,25 @@
+name: QuASIM CI
+on: [push, pull_request]
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: pip install qutip numpy scipy pytest ruff
+      - name: Run linter
+        run: ruff check .
+      - name: Generate QuASIM artifacts
+        run: python generate_quasim_jsons.py
+      - name: Run tests
+        run: |
+          export PYTHONPATH="${GITHUB_WORKSPACE}:${PYTHONPATH}"
+          pytest -v test_quasim_validator.py
+      - name: Run roadmap integration demo
+        run: |
+          export PYTHONPATH="${GITHUB_WORKSPACE}:${PYTHONPATH}"
+          python examples/roadmap_integration_demo.py
