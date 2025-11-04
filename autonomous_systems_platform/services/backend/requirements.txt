@@ -2,6 +2,8 @@ flask==3.0.0
 gunicorn==21.2.0
 uvicorn==0.24.0
 prometheus-client==0.19.0
+# Upper bound on numpy (<2.0.0) is required for compatibility with jax[cpu]==0.4.20,
+# which does not yet support numpy 2.x as of 2024-06.
 numpy<2.0.0
 jax[cpu]==0.4.20
 pytest==7.4.3
