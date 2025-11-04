@@ -6,9 +6,8 @@ Dependencies: qutip, numpy, scipy (all available in env)
 
 import json
 import numpy as np
-from qutip import (Qobj, basis, sigmax, sigmay, sigmaz, hadamard_transform,
-                   phasegate, rx, ry, rz, rand_unitary, fidelity, bloch_sphere,
-                   mesolve, Options)
+from qutip import (Qobj, sigmax, sigmay, sigmaz,
+                   phasegate, rx, ry, rz, fidelity)
 from qutip.qip.operations import snot  # T is sqrt(S), but approx
 from scipy.linalg import expm
 import os
