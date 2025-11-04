@@ -14,6 +14,7 @@ Usage:
   python scripts/auto_fix_pylint.py
 """
 
+import argparse
 import os
 import re
 import subprocess
@@ -112,6 +113,39 @@ def shorten_long_lines(file_path: Path):
 
 def main():
     """Main entry point for the automated lint repair script."""
+    parser = argparse.ArgumentParser(
+        description="Automated lint and documentation repair for QuASIM",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  %(prog)s                    # Run with default settings
+  %(prog)s --enable-docstrings  # Enable automatic docstring addition
+  %(prog)s --no-format        # Skip black/isort formatting
+  %(prog)s --no-pylint        # Skip pylint report generation
+        """,
+    )
+    parser.add_argument(
+        "--enable-docstrings",
+        action="store_true",
+        help="Enable automatic docstring addition (disabled by default for safety)",
+    )
+    parser.add_argument(
+        "--no-format",
+        action="store_true",
+        help="Skip running black and isort formatters",
+    )
+    parser.add_argument(
+        "--no-pylint",
+        action="store_true",
+        help="Skip running pylint and generating report",
+    )
+    parser.add_argument(
+        "--no-install",
+        action="store_true",
+        help="Skip installing missing dependencies",
+    )
+    args = parser.parse_args()
+
     print("🔧 Running automated QuASIM lint repair...")
 
     # Exclude certain directories from processing
@@ -125,30 +159,40 @@ def main():
 
     print(f"Found {len(python_files)} Python files to process")
 
+    # Apply basic fixes to all files
     for f in python_files:
         try:
             clean_trailing_whitespace(f)
             shorten_long_lines(f)
-            if ENABLE_AUTO_DOCSTRINGS:
+            if args.enable_docstrings:
                 ensure_docstrings(f)
         except Exception as e:
             print(f"Warning: Failed to process {f}: {e}")
 
     # Format imports and code style
-    subprocess.run(["isort", "."], check=False)
-    subprocess.run(["black", ".", f"--line-length={MAX_LINE_LENGTH}"], check=False)
+    if not args.no_format:
+        print("\n📦 Running isort and black...")
+        subprocess.run(["isort", "."], check=False, cwd=ROOT_DIR)
+        subprocess.run(
+            ["black", ".", f"--line-length={MAX_LINE_LENGTH}"], check=False, cwd=ROOT_DIR
+        )
 
     # Attempt to install missing modules to fix import errors
-    required_modules = ["plotly", "markdown", "numpy"]
-    for mod in required_modules:
-        subprocess.run(["pip", "install", mod], check=False)
+    if not args.no_install:
+        print("\n📥 Installing dependencies...")
+        required_modules = ["plotly", "markdown", "numpy"]
+        for mod in required_modules:
+            subprocess.run(["pip", "install", mod], check=False, capture_output=True)
 
     # Run pylint and store summary
-    report_file = ROOT_DIR / "lint_report.txt"
-    with open(report_file, "w", encoding="utf-8") as rep:
-        subprocess.run(["pylint", *[str(f) for f in python_files]], stdout=rep, check=False)
-
-    print(f"✅ Linting complete. Report saved to: {report_file}")
+    if not args.no_pylint:
+        print("\n🔍 Running pylint...")
+        report_file = ROOT_DIR / "lint_report.txt"
+        with open(report_file, "w", encoding="utf-8") as rep:
+            subprocess.run(["pylint", *[str(f) for f in python_files]], stdout=rep, check=False)
+        print(f"✅ Linting complete. Report saved to: {report_file}")
+    else:
+        print("✅ Lint repair complete (pylint skipped).")
 
 
 if __name__ == "__main__":

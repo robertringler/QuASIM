@@ -1,0 +1,167 @@
+# Automated Lint & Documentation Repair Script
+
+## Overview
+
+The `auto_fix_pylint.py` script provides automated linting and code repair for the QuASIM repository. It performs the following operations:
+
+1. **Fixes trailing whitespace** - Removes unnecessary whitespace at the end of lines
+2. **Shortens long lines** - Breaks lines longer than 100 characters
+3. **Adds docstrings** - Optionally adds placeholder docstrings to undocumented functions/classes
+4. **Formats code** - Runs `black` and `isort` to standardize code style
+5. **Installs dependencies** - Ensures required modules are installed
+6. **Generates lint report** - Runs `pylint` and saves results to `lint_report.txt`
+
+## Requirements
+
+Before running the script, ensure the following tools are installed:
+
+```bash
+pip install black isort pylint numpy markdown plotly
+```
+
+## Usage
+
+### Basic Usage
+
+Run the script with default settings:
+
+```bash
+python scripts/auto_fix_pylint.py
+```
+
+This will:
+- Clean trailing whitespace
+- Break long lines
+- Format code with black and isort
+- Install missing dependencies
+- Generate a pylint report
+
+### Command-Line Options
+
+```bash
+# Enable automatic docstring addition (use with caution)
+python scripts/auto_fix_pylint.py --enable-docstrings
+
+# Skip black/isort formatting
+python scripts/auto_fix_pylint.py --no-format
+
+# Skip pylint report generation
+python scripts/auto_fix_pylint.py --no-pylint
+
+# Skip dependency installation
+python scripts/auto_fix_pylint.py --no-install
+
+# Combine options
+python scripts/auto_fix_pylint.py --no-install --no-pylint
+```
+
+### View Help
+
+```bash
+python scripts/auto_fix_pylint.py --help
+```
+
+## Configuration
+
+The script can be configured by editing constants at the top of the file:
+
+- `MAX_LINE_LENGTH` - Maximum line length (default: 100)
+- `ENABLE_AUTO_DOCSTRINGS` - Enable/disable automatic docstring addition (default: False)
+- `DOCSTRING_TEMPLATE_FUNC` - Template for function docstrings
+- `DOCSTRING_TEMPLATE_CLASS` - Template for class docstrings
+
+## Safety Features
+
+### Docstring Addition (Disabled by Default)
+
+Automatic docstring addition is **disabled by default** because it can potentially break code syntax. Only enable it with the `--enable-docstrings` flag if you:
+
+1. Understand the risks
+2. Have proper version control in place
+3. Plan to review all changes
+
+The script is conservative and only adds docstrings when:
+- The function/class has a proper definition ending with `:`
+- The next line doesn't already have a docstring
+- The next line is not empty or a comment
+- The code structure appears valid
+
+### Directory Exclusions
+
+The script automatically skips files in the following directories:
+- `.git`
+- `build`
+- `install`
+- `.venv`
+- `__pycache__`
+- `node_modules`
+
+## Output
+
+The script generates a `lint_report.txt` file in the repository root containing the full pylint analysis. This file is excluded from git via `.gitignore`.
+
+## Integration with CI/CD
+
+To integrate this script into GitHub Actions workflows, add the following steps:
+
+```yaml
+- name: Install linting tools
+  run: pip install black isort pylint numpy markdown plotly
+
+- name: Auto-fix lint issues
+  run: python scripts/auto_fix_pylint.py --no-install
+
+- name: Verify lint status
+  run: pylint $(git ls-files '*.py') --exit-zero
+```
+
+## Troubleshooting
+
+### Black Formatting Errors
+
+If `black` fails to parse a file, it will report an error but continue processing other files. Review these errors manually as they often indicate syntax issues that need human attention.
+
+### Permission Errors
+
+Ensure the script is executable:
+
+```bash
+chmod +x scripts/auto_fix_pylint.py
+```
+
+### Import Errors
+
+If you encounter import errors, install the required dependencies:
+
+```bash
+pip install -r scripts/requirements.txt
+pip install black isort pylint
+```
+
+## Best Practices
+
+1. **Always review changes** - Use `git diff` to review modifications before committing
+2. **Run incrementally** - Test on small file sets first
+3. **Backup your work** - Ensure clean git state before running
+4. **Use flags wisely** - Skip expensive operations like pylint during development
+
+## Example Workflow
+
+```bash
+# 1. Ensure clean git state
+git status
+
+# 2. Run the auto-fix script
+python scripts/auto_fix_pylint.py
+
+# 3. Review changes
+git diff
+
+# 4. Stage and commit if satisfied
+git add -u
+git commit -m "chore: apply automated lint fixes"
+```
+
+## Contributing
+
+If you find issues or have suggestions for improving this script, please open an issue or submit a pull request.
