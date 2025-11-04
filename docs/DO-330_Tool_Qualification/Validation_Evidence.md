@@ -317,8 +317,8 @@ Audit logging complies with requirements.
 PASSED test_quasim_validator.py::test_deterministic_replay
 
 Replay Validation:
-- Original execution: timestamp=1699046801645739
-- Replay execution: timestamp=1699046801645937
+- Original execution: 2025-11-03T00:06:41.645739Z
+- Replay execution: 2025-11-03T00:06:41.645937Z
 - Timestamp drift: 0.198 μs ✓ (< 1.0 μs)
 - Result comparison: Identical ✓
 - Audit log updated: replay_id recorded ✓

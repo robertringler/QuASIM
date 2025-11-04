@@ -23,7 +23,7 @@ The QuASIM Simulation Runtime performs quantum circuit simulation and tensor net
 
 ### 2.3 Operational Requirements
 
-**OR-SIM-001:** The runtime shall execute quantum circuits with deterministic results when provided identical seed values.
+**OR-SIM-001:** The runtime shall execute quantum circuits with deterministic results when provided identical seed values, producing outputs with relative error < 1e-15 (fp64 precision) between executions.
 
 **OR-SIM-002:** The runtime shall support precision modes: fp8, fp16, fp32, and fp64 for numerical calculations.
 

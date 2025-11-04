@@ -436,7 +436,7 @@ The complete qualification package includes:
 | **Phase 10** | Final Acceptance | 2 weeks | QA | Qualification Certificate |
 | **Total** | | **34 weeks** | | |
 
-Target Completion: **Q4 2025**
+Target Completion: **34 weeks from program start**
 
 ### 9.2 Resource Allocation
 

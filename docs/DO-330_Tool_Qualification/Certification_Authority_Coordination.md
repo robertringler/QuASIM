@@ -340,7 +340,7 @@ Tools are authorized for use in certification programs when:
 
 **Office:** Aircraft Certification Service (AIR)  
 **Contact:** Software and Complex Electronic Hardware Section  
-**Email:** 9-AVS-AIR-SIH@faa.gov  
+**Email:** Contact via website or certification office  
 **Website:** https://www.faa.gov/aircraft/air_cert/
 
 **Key Personnel:**

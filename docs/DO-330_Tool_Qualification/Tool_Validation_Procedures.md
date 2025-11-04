@@ -462,7 +462,7 @@ Validate CDP package generation and compliance verification.
 
 1. **Environment Setup**
    ```bash
-   cd /home/runner/work/QuASIM/QuASIM
+   cd <QUASIM_ROOT>
    python3 -m pytest test_quasim_validator.py -v
    ```
 
