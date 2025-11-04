@@ -99,12 +99,21 @@ jobs:
               python3 -c "import yaml; yaml.safe_load(open('$workflow'))" || exit 1
             fi
           done
+          shopt -s nullglob
+          workflow_files=(.github/workflows/*.yml .github/workflows/*.yaml)
+          
+          if [ ${#workflow_files[@]} -eq 0 ]; then
+            echo "ℹ️ No workflow files found"
+          else
+            for workflow in "${workflow_files[@]}"; do
+              echo "Checking $workflow"
+              python3 -c "import yaml; yaml.safe_load(open('$workflow'))" || exit 1
+            done
+          fi
 
       - name: Check workflow permissions
         run: |
           echo "Verifying workflow permissions..."
-          for workflow in .github/workflows/*.yml .github/workflows/*.yaml; do
-            if [ -f "$workflow" ]; then
               if grep -q "permissions:" "$workflow"; then
                 echo "✓ Permissions specified in $workflow"
               else
