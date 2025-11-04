@@ -80,7 +80,7 @@ def print_warning(message: str) -> None:
 
 def print_info(message: str) -> None:
     """Print an info message."""
-    print(f"{Colors.BLUE}ℹ {message}{Colors.RESET}")
+        subprocess.run(
 
 
 def check_docker_available() -> bool:
