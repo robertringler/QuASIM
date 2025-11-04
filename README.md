@@ -290,29 +290,38 @@ The ONERA M6 benchmark configurations are available in `QuASIM/onera/`:
 
 The repository includes automated workflows for:
 
-1. **PR Checks** (`.github/workflows/pr-checks.yml`)
+1. **Certification CI/CD Pipeline** (`.github/workflows/certification-cicd.yml`) 🆕
+   - Automated certification test suite execution on every PR and main branch update
+   - Validation gates for Monte-Carlo fidelity (≥ 0.97 ± 0.005)
+   - MC/DC coverage compliance (100% per DO-178C §6.4.4)
+   - Anomaly checks (0 open anomalies required)
+   - Automatic generation and archival of certification artifacts (JSON reports, logs, CDPs)
+   - Standards compliance: DO-178C Level A, ECSS-Q-ST-80C Rev. 2, NASA E-HBK-4008
+   - See [docs/CERTIFICATION_CICD.md](docs/CERTIFICATION_CICD.md) for details
+
+2. **PR Checks** (`.github/workflows/pr-checks.yml`)
    - Polyglot linting and testing (Python, Node.js, Go, Rust)
    - Code formatting validation (black, prettier, cargo fmt)
    - Security checks and permissions audit
    - Markdown/YAML validation
 
-2. **Repository Audit & Auto-Fix** (`.github/workflows/repo-audit-autofix.yml`)
+3. **Repository Audit & Auto-Fix** (`.github/workflows/repo-audit-autofix.yml`)
    - Scheduled weekly audits (Mondays 06:00 UTC)
    - Automated code formatting and linting fixes
    - Repository structure enforcement
    - Opens PR with non-destructive improvements
 
-3. **Main Guard** (`.github/workflows/main-guard.yml`)
+4. **Main Guard** (`.github/workflows/main-guard.yml`)
    - Post-merge health checks on main branch
    - Automated revert PR creation for breaking merges
    - Prevents broken code in production branch
 
-4. **QuASIM Master Build & Test** (`.github/workflows/quasim-master-build.yml`)
+5. **QuASIM Master Build & Test** (`.github/workflows/quasim-master-build.yml`)
    - Self-test validation
    - Core library build (CPU fallback)
    - Demo execution
 
-5. **CUDA Build** (`.github/workflows/cuda-build.yml`)
+6. **CUDA Build** (`.github/workflows/cuda-build.yml`)
    - HPC module verification
    - CUDA kernel validation
    - pybind11 bindings check
