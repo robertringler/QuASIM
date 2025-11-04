@@ -209,14 +209,13 @@ class MemoryGraphOptimizer:
                 # Find best unplaced neighbor of any placed node
                 for placed_node in placed:
                     for neighbor in self.nodes[placed_node].neighbors:
-                        if neighbor not in placed and neighbor in node_scores:
-                            if node_scores[neighbor] > best_score:
-                                best_score = node_scores[neighbor]
-                                best_next = neighbor
+                        if neighbor not in placed and neighbor in node_scores and node_scores[neighbor] > best_score:
+                            best_score = node_scores[neighbor]
+                            best_next = neighbor
 
                 # If no neighbors found, pick highest-scored unplaced node
                 if best_next is None:
-                    for node_id, score in sorted_nodes:
+                    for node_id, _score in sorted_nodes:
                         if node_id not in placed:
                             best_next = node_id
                             break

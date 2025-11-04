@@ -20,7 +20,6 @@ from typing import Any
 try:
     from fastapi import FastAPI, Header, HTTPException, status
     from fastapi.middleware.cors import CORSMiddleware
-    from fastapi.responses import JSONResponse
     from pydantic import BaseModel, Field
     FASTAPI_AVAILABLE = True
 except ImportError:

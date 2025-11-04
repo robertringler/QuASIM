@@ -16,19 +16,15 @@ Example:
 from __future__ import annotations
 
 import asyncio
+import importlib.util
 import logging
 import time
 from dataclasses import dataclass
 from enum import Enum
+from pathlib import Path
 from typing import Any
 
-try:
-    import aiohttp
-    AIOHTTP_AVAILABLE = True
-except ImportError:
-    AIOHTTP_AVAILABLE = False
-
-from pathlib import Path
+AIOHTTP_AVAILABLE = importlib.util.find_spec('aiohttp') is not None
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)

@@ -81,8 +81,10 @@ def main():
 
             if first_line.startswith('{{-') or '{{' in first_line:
                 print("  -> Helm template file (expected to fail standard YAML parsing)")
-            elif '---' in open(full_path).read().count('---') > 1:
-                print("  -> Multi-document YAML (valid format)")
+            elif '---' in first_line:
+                with open(full_path, encoding='utf-8') as f_check:
+                    if f_check.read().count('---') > 1:
+                        print("  -> Multi-document YAML (valid format)")
             else:
                 result = fix_flow_node_yaml(full_path)
                 if not result:

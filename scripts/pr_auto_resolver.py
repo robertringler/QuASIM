@@ -104,15 +104,14 @@ class PRAutoResolver:
         # Check for outdated branch
         base_commit = self.repo.get_branch(pr.base.ref).commit
         pr_commits = list(pr.get_commits())
-        if pr_commits:
+        if pr_commits and pr_commits[-1].commit.author.date < base_commit.commit.author.date:
             # Compare dates to see if PR is behind base
-            if pr_commits[-1].commit.author.date < base_commit.commit.author.date:
-                issues.append(PRIssue(
-                    type='outdated',
-                    description='PR branch is behind base branch',
-                    severity='medium',
-                    fixable=True
-                ))
+            issues.append(PRIssue(
+                type='outdated',
+                description='PR branch is behind base branch',
+                severity='medium',
+                fixable=True
+            ))
 
         return issues
 
@@ -353,7 +352,7 @@ class PRAutoResolver:
             try:
                 ref = self.repo.get_git_ref(f"heads/{pr.head.ref}")
                 ref.delete()
-            except:
+            except Exception:
                 pass  # Branch might be from a fork or protected
 
             return True
@@ -432,15 +431,14 @@ class PRAutoResolver:
 
             # Check if all critical issues are resolved
             remaining_critical = [i for i in issues if i.severity == 'critical' and not i.fixed]
-            if not remaining_critical:
+            if not remaining_critical and self.check_merge_criteria(pr, issues) and self.merge_pr(pr):
                 # Try to merge
-                if self.check_merge_criteria(pr, issues) and self.merge_pr(pr):
-                    return PRResolutionResult(
-                        pr_number=pr.number,
-                        status='success',
-                        issues_found=issues,
-                        issues_fixed=fixed_issues,
-                        attempts=attempts,
+                return PRResolutionResult(
+                    pr_number=pr.number,
+                    status='success',
+                    issues_found=issues,
+                    issues_fixed=fixed_issues,
+                    attempts=attempts,
                         merged=True,
                         message=f'PR merged successfully after fixing {len(fixed_issues)} issues'
                     )

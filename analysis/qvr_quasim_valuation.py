@@ -221,7 +221,7 @@ def create_bar_chart(
         svg_parts.append(
             f"<text x='{base_x + (num_series * bar_width) / 2}' y='{height - margin + 20}' text-anchor='middle' class='label'>{category}</text>"
         )
-        for s_idx, (series_name, values) in enumerate(series.items()):
+        for s_idx, (_series_name, values) in enumerate(series.items()):
             value = values[idx]
             bar_height = 0 if max_value == 0 else (value / max_value) * (chart_height - 20)
             x = base_x + s_idx * bar_width
@@ -275,7 +275,7 @@ def create_line_chart(
 
     colors = ["#EF4444", "#3B82F6", "#22C55E"]
 
-    for i, (name, values) in enumerate(series.items()):
+    for i, (_name, values) in enumerate(series.items()):
         points = []
         for idx, value in enumerate(values):
             x = margin + (idx / (len(x_values) - 1)) * chart_width
