@@ -82,7 +82,8 @@ This guide brings up a production-ready EKS cluster with GPU node groups and ins
 
 ### Aerospace & Defense
 - **Mission Planning**: Quantum-optimized trajectory calculations with real-time constraint solving
-- **Digital Twins**: High-fidelity aircraft system simulation with quantum noise modeling
+- **Digital Twins**: High-fidelity spacecraft simulation with vehicle models (Dragon, Starship, Falcon 9, Orion/SLS)
+- **Vehicle Telemetry**: Real-time ingestion and validation of spacecraft GNC data for mission operations
 - **Supply Chain Optimization**: Quantum annealing for logistics and resource allocation
 
 ### Pharmaceutical & Life Sciences

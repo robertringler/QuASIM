@@ -20,6 +20,7 @@ For a comprehensive overview of QuASIM's capabilities and specifications, see [`
 - **[QuASIM Integration](quasim_integration.md)** — Quantum simulation runtime integration
 - **[Power & Thermal](power_thermal.md)** — DVFS, cooling, and telemetry
 - **[Firmware Boot Flow](firmware_bootflow.md)** — Boot sequence and initialization
+- **[Vehicle Models](vehicle_models.md)** — Space vehicle telemetry adapters and mission profiles
 
 ## Additional Resources
 
