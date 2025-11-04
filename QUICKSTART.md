@@ -62,6 +62,27 @@ Once the services are running:
 2. Click the "Run Kernel" button
 3. You should see output with state_vector, energy, and convergence values
 
+### Automated Sanity Check
+
+You can run a comprehensive automated sanity check that validates the entire stack:
+
+```bash
+make sanity-check
+```
+
+This will:
+- Build Docker images
+- Start all services
+- Test health endpoints
+- Validate API functionality
+- Test frontend-backend communication
+- Clean up resources
+
+The sanity check is useful for:
+- Verifying the stack builds correctly after code changes
+- CI/CD pipeline validation
+- Pre-deployment testing
+
 ## API Endpoints
 
 - `GET /health` - Health check endpoint

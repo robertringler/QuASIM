@@ -149,14 +149,28 @@ kubectl apply -n argocd -f ../../helm/argocd-apps/app-of-apps.yaml
 Run repository sanity checks locally before opening a pull request:
 
 ```bash
+# Run code validation (YAML, JSON, Terraform, Python syntax)
 make test
+
+# Run full stack sanity check (Docker build and integration tests)
+make sanity-check
 ```
 
-The harness parses all Helm/Kustomize YAML manifests to ensure syntactic
+The `make test` harness parses all Helm/Kustomize YAML manifests to ensure syntactic
 correctness and, when the Terraform CLI is available, also runs `terraform init`
 with the backend disabled followed by `terraform validate` for each module. Any
 missing tooling is reported as a skipped check so contributors on lightweight
 environments still receive actionable feedback.
+
+The `make sanity-check` command performs a comprehensive validation of the full stack:
+- Validates docker-compose configuration
+- Builds Docker images for backend and frontend services
+- Starts services and waits for health checks
+- Tests all API endpoints (health, kernel, metrics)
+- Validates frontend accessibility and content
+- Cleans up resources after testing
+
+This ensures the complete application stack builds and runs correctly before deployment.
 
 ## Contributing
 
