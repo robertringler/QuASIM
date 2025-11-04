@@ -91,16 +91,32 @@ def ensure_docstrings(file_path: Path):
 
 
 def shorten_long_lines(file_path: Path):
-    """Breaks long lines > MAX_LINE_LENGTH."""
+    """Breaks long lines > MAX_LINE_LENGTH.
+
+    This function is conservative and skips:
+    - Lines containing URLs (http://, https://)
+    - Lines in docstrings or comments that are hard to split
+    """
     content = file_path.read_text(encoding="utf-8").splitlines()
     new_lines = []
     for line in content:
-        if len(line) > MAX_LINE_LENGTH and "http" not in line:
+        # Skip lines with URLs or that are already in docstrings/comments
+        has_url = re.search(r"https?://", line)
+
+        if len(line) > MAX_LINE_LENGTH and not has_url:
+            # Preserve original indentation
+            indent = len(line) - len(line.lstrip())
+            indent_str = line[:indent]
+
+            # Find a good breaking point
             midpoint = line.rfind(" ", 0, MAX_LINE_LENGTH)
-            if midpoint == -1:
-                midpoint = MAX_LINE_LENGTH
-            new_lines.append(line[:midpoint] + " \\")
-            new_lines.append("    " + line[midpoint:].lstrip())
+            if midpoint == -1 or midpoint <= indent:
+                # Can't find a good break point, skip this line
+                new_lines.append(line)
+            else:
+                # Break the line and preserve indentation
+                new_lines.append(line[:midpoint] + " \\")
+                new_lines.append(indent_str + "    " + line[midpoint:].lstrip())
         else:
             new_lines.append(line)
     file_path.write_text("\n".join(new_lines) + "\n", encoding="utf-8")
@@ -179,10 +195,19 @@ Examples:
 
     # Attempt to install missing modules to fix import errors
     if not args.no_install:
-        print("\n📥 Installing dependencies...")
+        print("\n📥 Checking and installing missing dependencies...")
         required_modules = ["plotly", "markdown", "numpy"]
         for mod in required_modules:
-            subprocess.run(["pip", "install", mod], check=False, capture_output=True)
+            result = subprocess.run(
+                ["pip", "install", mod, "--quiet"],
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+            if result.returncode != 0:
+                print(f"Warning: Failed to install {mod}: {result.stderr}")
+            else:
+                print(f"  ✓ {mod}")
 
     # Run pylint and store summary
     if not args.no_pylint:
