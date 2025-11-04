@@ -87,14 +87,13 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Check for elevated permissions
         run: |
           echo "Checking for elevated permissions in workflows..."
           if grep -r "write-all\|actions: write" .github/workflows/; then
             echo "⚠️ Found elevated permissions - requires review"
+            exit 1
           else
             echo "✓ No elevated permissions found"
           fi
@@ -103,15 +102,7 @@ jobs:
       - name: Check for unsafe script execution
         run: |
           echo "Checking for unsafe script patterns..."
-          # Get the base branch ref, handling cases where it might not exist
-          BASE_REF="${{ github.event.pull_request.base.sha }}"
-          if [ -n "$BASE_REF" ] && git cat-file -e "$BASE_REF" 2>/dev/null; then
-            git diff "$BASE_REF"...HEAD -- '*.sh' '*.py' | grep -E '(eval|exec|os\.system)' || echo "✓ No unsafe patterns found in changed files"
-          else
-            echo "ℹ️ Base ref not available, checking all files..."
-            git grep -E '(eval|exec|os\.system)' -- '*.sh' '*.py' && echo "⚠️ Found potentially unsafe patterns" || echo "✓ No unsafe patterns found"
-          fi
-        continue-on-error: true
+          git diff origin/main...HEAD -- '*.sh' '*.py' | grep -E '(eval|exec|os\.system)' || echo "✓ No unsafe patterns found"
 
   dockerfile-security:
     name: Dockerfile Security Check
@@ -123,31 +114,24 @@ jobs:
       - name: Check Dockerfiles
         run: |
           echo "Scanning Dockerfiles for security issues..."
-          
-          # Check if any Dockerfiles exist first
-          if ! find . -name "Dockerfile*" -type f | grep -q .; then
-            echo "ℹ️ No Dockerfiles found"
-          else
-            # Process each Dockerfile
-            find . -name "Dockerfile*" -type f | while read -r dockerfile; do
-              echo "Checking $dockerfile"
-              
-              # Check for root user
-              if grep -q "USER root" "$dockerfile" 2>/dev/null; then
-                echo "⚠️ $dockerfile uses root user"
-              fi
-              
-              # Check for latest tags
-              if grep -q ":latest" "$dockerfile" 2>/dev/null; then
-                echo "⚠️ $dockerfile uses :latest tag"
-              fi
-              
-              # Check for COPY with broad patterns
-              if grep -qE "COPY \. \." "$dockerfile" 2>/dev/null; then
-                echo "⚠️ $dockerfile uses broad COPY pattern"
-              fi
-            done
-          fi
+          find . -name "Dockerfile*" -type f | while read -r dockerfile; do
+            echo "Checking $dockerfile"
+            
+            # Check for root user
+            if grep -q "USER root" "$dockerfile" 2>/dev/null; then
+              echo "⚠️ $dockerfile uses root user"
+            fi
+            
+            # Check for latest tags
+            if grep -q ":latest" "$dockerfile" 2>/dev/null; then
+              echo "⚠️ $dockerfile uses :latest tag"
+            fi
+            
+            # Check for COPY with broad patterns
+            if grep -qE "COPY \. \." "$dockerfile" 2>/dev/null; then
+              echo "⚠️ $dockerfile uses broad COPY pattern"
+            fi
+          done || echo "No Dockerfiles found"
 
   defense-summary:
     name: Defense Compliance Summary
