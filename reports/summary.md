@@ -2,9 +2,9 @@
 
 ## Environment
 
-- **Commit**: `a5f5b35a`
+- **Commit**: `1d646b8c`
 - **Branch**: `copilot/execute-quasim-benchmark-suite-again`
-- **Dirty**: True
+- **Dirty**: False
 
 - **OS**: Linux
 - **Python**: 3.12.3
@@ -20,9 +20,9 @@
 
 | Kernel | Backend | Precision | p50 (ms) | p90 (ms) | Throughput (ops/s) |
 | --- | --- | --- | --- | --- | --- |
-| autonomous_systems | jax | fp32 | 0.011 | 0.011 | 92373.35 |
-| pressure_poisson | cuda | fp32 | 44.499 | 45.144 | 22.42 |
-| quasim_runtime | cpu | fp32 | 115.596 | 115.981 | 8.65 |
+| autonomous_systems | cpu | fp32 | 0.011 | 0.012 | 88454.87 |
+| quasim_runtime | cpu | fp32 | 38.393 | 38.763 | 25.98 |
+| pressure_poisson | cpu | fp32 | 43.663 | 43.862 | 22.90 |
 
 ## Resource Usage
 
@@ -31,8 +31,7 @@ No memory data available.
 ## Key Findings
 
 - **Fastest Kernel**: `autonomous_systems` (0.011 ms p50)
-- **Highest Throughput**: `autonomous_systems` (92373.35 ops/s)
-- **Backends Tested**: cpu, cuda, jax
+- **Highest Throughput**: `autonomous_systems` (88454.87 ops/s)
 
 ## Recommendations
 
