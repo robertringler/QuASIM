@@ -20,6 +20,8 @@ jobs:
   lint:
     name: Lint and Type Check
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v3
       
@@ -44,6 +46,8 @@ jobs:
   test:
     name: Test (Python ${{ matrix.python-version }})
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     strategy:
       matrix:
         python-version: ['3.10', '3.11', '3.12']
@@ -74,6 +78,8 @@ jobs:
   security:
     name: Security Scan
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v3
       
@@ -94,6 +100,8 @@ jobs:
   docs:
     name: Documentation Validation
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v3
       
@@ -110,6 +118,8 @@ jobs:
   integration:
     name: Integration Tests
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v3
       
@@ -130,6 +140,8 @@ jobs:
   coverage:
     name: Coverage Report
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     needs: test
     steps:
       - uses: actions/checkout@v3

@@ -2,7 +2,7 @@
 
 from dataclasses import dataclass
 from enum import Enum
-from typing import Any, Dict, Optional
+from typing import Any, Dict, List, Optional
 
 
 class ProfileType(Enum):
@@ -139,7 +139,7 @@ class ProfileManager:
         self.profiles[name] = profile
         return profile
 
-    def list_profiles(self) -> list[str]:
+    def list_profiles(self) -> List[str]:
         """List all available profiles.
 
         Returns:

@@ -2,7 +2,7 @@
 
 from dataclasses import dataclass
 from enum import Enum
-from typing import Any, Callable, Dict, List
+from typing import Any, Callable, Dict, List, Tuple
 
 import numpy as np
 
@@ -278,9 +278,9 @@ def power_sweep(
     backend: Any,
     measure_fn: Callable,
     apply_fn: Callable,
-    power_range: tuple[float, float],
+    power_range: Tuple[float, float],
     steps: int = 10,
-) -> List[tuple[float, Dict[str, Any]]]:
+) -> List[Tuple[float, Dict[str, Any]]]:
     """Power sweep calibration routine.
 
     Args:

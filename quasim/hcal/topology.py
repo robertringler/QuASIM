@@ -23,7 +23,7 @@ class InterconnectType(Enum):
 
     PCIE = "pcie"
     NVLINK = "nvlink"
-    INFINBAND = "infiniband"
+    INFINIBAND = "infiniband"
     NUMA = "numa"
 
 

@@ -10,7 +10,7 @@ HCAL provides a unified API for hardware control and calibration with:
 """
 
 from pathlib import Path
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Optional, Tuple
 
 from quasim.hcal.actuator import Actuator
 from quasim.hcal.backends.nvidia_nvml import NvidiaNvmlBackend
@@ -137,7 +137,7 @@ class HCAL:
         return bias_trim_v1(device_id, backend, measure_fn, apply_fn)
 
     def run_power_sweep(
-        self, device_id: str, power_range: tuple[float, float], steps: int = 10
+        self, device_id: str, power_range: Tuple[float, float], steps: int = 10
     ):
         """Run power sweep calibration.
 
