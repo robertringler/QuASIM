@@ -41,6 +41,7 @@ Target customers include aerospace primes (Lockheed Martin, Northrop Grumman, Bo
 ## Compliance & Certification
 
 QuASIM is **COMPLIANT** with defense, aerospace, and industry standards:
+
 - 📋 [Compliance Assessment Index](COMPLIANCE_ASSESSMENT_INDEX.md) - **Start here** for navigation
 - ✅ [Defense Compliance Summary](DEFENSE_COMPLIANCE_SUMMARY.md) - Comprehensive assessment (26KB)
 - ✅ [Compliance Status Checklist](COMPLIANCE_STATUS_CHECKLIST.md) - Quick reference (6.5KB)
@@ -176,21 +177,25 @@ python3 scripts/run_phase3_cycle.py --generations 10 --population 20
 QuASIM operates as a 4-layer stack designed for hybrid quantum-classical workloads:
 
 ### Layer 1: Client APIs
+
 - **Python SDK** (`quasim` module): High-level tensor operations, circuit construction, numpy integration
 - **C++ SDK** (`libquasim`): Low-level CUDA/HIP kernel invocation for performance-critical paths
 - **REST/gRPC APIs**: HTTP endpoints for remote job submission, status polling, result retrieval
 
 ### Layer 2: Quantum Runtime
+
 - **Circuit Compiler**: Graph optimization, gate decomposition, transpilation for target backends
 - **Tensor Planner**: Contraction strategy selection (greedy, optimal, metaheuristic) for network simplification
 - **GPU Scheduler**: Work distribution across NVIDIA/AMD accelerators with NVLink-C2C coherence
 
 ### Layer 3: Hardware Abstraction
+
 - **Grace CPU** (72-core ARM v9): Orchestration, classical preprocessing, mixed-precision control flow
 - **Blackwell GPU** (Tensor Cores): cuQuantum-accelerated contractions, FP8/FP16/FP32/FP64 execution
 - **NVLink-C2C**: 900 GB/s bidirectional bandwidth for zero-copy data sharing across CPU-GPU boundary
 
 ### Layer 4: Platform Services
+
 - **Kubernetes Orchestration** (EKS/GKE/AKS): GPU node pools, Karpenter autoscaling, multi-AZ deployments
 - **Observability** (Prometheus/Grafana/Loki/Tempo): Metrics, logs, traces with 99.95% SLA monitoring
 - **Security** (Vault/Gatekeeper/Cilium): Secrets management, policy enforcement, network segmentation
@@ -269,7 +274,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
 **License**: Apache License 2.0 — see [LICENSE](LICENSE) for details.
 
-**Contact/Procurement**: For enterprise inquiries, federal/defense procurement, or partnership opportunities, contact procurement@quasim.io.
+**Contact/Procurement**: For enterprise inquiries, federal/defense procurement, or partnership opportunities, contact <procurement@quasim.io>.
 
 ---
 
@@ -280,12 +285,14 @@ QuASIM leads the quantum simulation market through unique integration of five cr
 ### 🏆 Where QuASIM LEADS
 
 #### 1. Hybrid Quantum-Classical Architecture Integration
+
 - **NVLink-C2C coherent fabric** between Grace CPU (72 cores) and Blackwell GPU clusters with unified virtual address spaces
 - **Zero-copy data sharing** across quantum and classical workloads enabling 10-100x performance improvements
 - **Hardware-accelerated tensor network contraction** with cuQuantum integration
 - **Competitive Edge**: Only platform providing production-grade unified runtime for seamless quantum-classical workflows
 
 #### 2. Autonomous Self-Evolving Kernel Architecture (Phase III)
+
 - **Reinforcement learning-driven optimization** that self-improves over time without human intervention
 - **Runtime introspection** with real-time performance analysis and adaptive optimization
 - **Energy-adaptive regulation** with thermal throttling and workload migration for 30%+ energy savings
@@ -294,6 +301,7 @@ QuASIM leads the quantum simulation market through unique integration of five cr
 - **Competitive Edge**: Only quantum platform with autonomous kernel evolution and formal verification for aerospace applications
 
 #### 3. Aerospace-Grade Certification & Compliance
+
 - **DO-178C Level A** (highest software safety level for aerospace systems)
 - **ECSS-Q-ST-80C** (European Space Agency quality standards)
 - **NASA E-HBK-4008** compliance for mission-critical systems
@@ -302,6 +310,7 @@ QuASIM leads the quantum simulation market through unique integration of five cr
 - **Competitive Edge**: ONLY quantum simulation platform with full aerospace certification and validated flight data
 
 #### 4. Production-Ready Enterprise Infrastructure
+
 - **GPU-accelerated EKS clusters** with automated Terraform provisioning
 - **GitOps automation** via ArgoCD app-of-apps pattern for declarative platform management
 - **Comprehensive observability** (Prometheus, Grafana, Loki, Tempo) with 99.95% uptime SLA
@@ -310,6 +319,7 @@ QuASIM leads the quantum simulation market through unique integration of five cr
 - **Competitive Edge**: Only quantum platform with turnkey enterprise deployment and compliance frameworks built-in
 
 #### 5. Multi-Vehicle Mission Simulation
+
 - **SpaceX Falcon 9** (orbital dynamics, staging sequences, booster recovery)
 - **NASA Orion/SLS** (deep space mission profiles, lunar trajectory optimization)
 - **Dragon spacecraft** (ISS docking scenarios, thermal/power/GNC telemetry)
@@ -317,6 +327,7 @@ QuASIM leads the quantum simulation market through unique integration of five cr
 - **Competitive Edge**: No competing platform has validated mission data across multiple real-world launch vehicles
 
 #### 6. Quantum-Enhanced Digital Twins with Advanced Physics
+
 - **Conformal Field Theory (CFT) kernels** for phase space analysis with quantum corrections
 - **Quantum-inspired optimization** via Ising model simulated annealing (3-10x speedup over classical)
 - **Monte Carlo simulation** with quantum amplitude estimation speedup (quadratic advantage)
@@ -324,6 +335,7 @@ QuASIM leads the quantum simulation market through unique integration of five cr
 - **Competitive Edge**: Bridges gap between pure quantum simulation and enterprise digital twins (ANSYS, Siemens)
 
 #### 7. Fortune 500 Integration Analysis & Market Positioning
+
 - **QuASIM Integration Index (QII)** scoring system evaluating all 500 companies across 15 technical/business dimensions
 - **Sector-specific adoption pathways** (aerospace 85% fit, pharma 78%, financial services 72%, manufacturing 68%)
 - **0.85 Tech Moat Index** (composite score: architectural maturity, quantum libraries, ecosystem, compliance)
@@ -331,6 +343,7 @@ QuASIM leads the quantum simulation market through unique integration of five cr
 - **Competitive Edge**: Only quantum platform with structured go-to-market analysis and customer-specific integration scoring
 
 #### 8. Distributed Multi-GPU/Multi-Node Scalability
+
 - **JAX pjit/pmap and PyTorch DDP/FSDP** parallelism with near-linear scaling to 128+ GPUs
 - **MPI/NCCL** multi-node execution with InfiniBand RDMA for <1μs latency
 - **State sharding** with distributed gate application maintaining 99.9%+ fidelity
@@ -339,6 +352,7 @@ QuASIM leads the quantum simulation market through unique integration of five cr
 - **Competitive Edge**: Scales beyond single-GPU limitations (2-32+ qubit simulations across clusters)
 
 #### 9. Developer Experience & API Compatibility
+
 - **High-level Python SDK** (`quasim` module with context managers and numpy integration)
 - **Low-level C++ runtime** (`libquasim`) for performance-critical operations (10-100x faster)
 - **CUDA 12.x API parity** for seamless migration from NVIDIA stacks
@@ -347,6 +361,7 @@ QuASIM leads the quantum simulation market through unique integration of five cr
 - **Competitive Edge**: Hardware-level performance with enterprise API compatibility (unlike pure-Python frameworks)
 
 #### 10. Continuous Certification CI/CD Pipeline
+
 - **4-stage validation pipeline** enforcing DO-178C, ECSS-Q-ST-80C, NASA E-HBK-4008 gates
 - **Monte Carlo fidelity ≥0.97** requirement with automated rollback on violations
 - **100% MC/DC coverage** for safety-critical code paths
@@ -357,6 +372,7 @@ QuASIM leads the quantum simulation market through unique integration of five cr
 ### 🎯 Unique Value Proposition
 
 QuASIM occupies a unique position at the intersection of:
+
 1. **Quantum simulation** (tensor networks, noise modeling, error mitigation)
 2. **Enterprise infrastructure** (Kubernetes, observability, security, compliance)
 3. **Aerospace certification** (DO-178C, real mission validation, formal verification)
@@ -390,6 +406,7 @@ python3 generate_quasim_jsons.py --output-dir . --trajectories 1024
 ```
 
 **Verification Success Criteria:**
+
 - Mean fidelity ≥ 0.97 ± 0.005
 - Convergence rate ≥ 98%
 - Deterministic replay drift < 1μs
@@ -400,6 +417,7 @@ python3 generate_quasim_jsons.py --output-dir . --trajectories 1024
 ## References
 
 For comprehensive technical details, see:
+
 - **Phase III Overview**: [PHASE3_OVERVIEW.md](PHASE3_OVERVIEW.md)
 - **Fortune 500 Analysis**: [FORTUNE500_IMPLEMENTATION_SUMMARY.md](FORTUNE500_IMPLEMENTATION_SUMMARY.md)
 - **Compliance Framework**: [COMPLIANCE_IMPLEMENTATION_SUMMARY.md](COMPLIANCE_IMPLEMENTATION_SUMMARY.md)
@@ -411,11 +429,13 @@ For comprehensive technical details, see:
 ## System Requirements
 
 **Required:**
+
 - Python 3.8+
 - Docker 20.10+ (containerized deployment)
 - 8GB RAM minimum (16GB recommended)
 
 **Optional (full feature set):**
+
 - CUDA Toolkit 12.x (GPU acceleration)
 - Terraform ≥ 1.7 (infrastructure provisioning)
 - kubectl ≥ 1.29, helm ≥ 3.14 (Kubernetes deployment)
@@ -435,6 +455,7 @@ QuASIM uniquely combines capabilities that no competing platform (IBM Qiskit, Go
 5. **Fortune 500 Integration Framework**: QuASIM Integration Index (QII) covering 500 companies with sector-specific adoption pathways
 
 **Competitive Landscape:**
+
 - **IBM Qiskit**: Quantum hardware access, lacks enterprise infrastructure
 - **Google Quantum AI**: Research-oriented, no production frameworks
 - **AWS Braket**: Cloud-only, no on-premises/hybrid deployment
@@ -492,10 +513,12 @@ QuASIM's development spans 12 phases (see [PHASE3_OVERVIEW.md](PHASE3_OVERVIEW.m
 **X–XII (Enterprise)**: Multi-cloud orchestration, Fortune 500 market analysis, BioSwarm bioinformatics
 
 ### Dual-Mode Architecture
+
 - **CPU Fallback**: Pure Python (NumPy), no external dependencies, CI/CD compatible (10-100× slower)
 - **GPU Accelerated**: CUDA/HIP kernels, cuTensorNet integration (10-100× faster, requires compute ≥ 7.0)
 
 ### HPC Edition
+
 - MPI/NCCL multi-node execution, JAX pjit/pmap + PyTorch DDP/FSDP parallelism
 - State sharding, checkpoint/restore fault tolerance, deterministic reproducibility
 - Near-linear scaling to 128+ GPUs with InfiniBand RDMA (<1μs latency)
