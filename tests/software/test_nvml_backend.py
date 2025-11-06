@@ -169,6 +169,8 @@ class TestNVMLBackendWithMock(unittest.TestCase):
         """Test applying SM clock setpoint."""
         mock_pynvml.nvmlInit.return_value = None
         mock_pynvml.nvmlDeviceSetApplicationsClocks.return_value = None
+        # Mock current memory clock retrieval
+        mock_pynvml.nvmlDeviceGetClockInfo.return_value = 1215
 
         with patch('quasim.hardware.backends.nvml_backend.NVML_AVAILABLE', True):
             from quasim.hardware.backends.nvml_backend import NVMLBackend
@@ -176,14 +178,17 @@ class TestNVMLBackendWithMock(unittest.TestCase):
             result = backend.apply_setpoint("GPU0", "sm_clock_mhz", 1410, dry_run=False)
 
             assert result["success"]
+            # Should preserve current memory clock (1215) and set SM clock to 1410
             mock_pynvml.nvmlDeviceSetApplicationsClocks.assert_called_once_with(
-                self.mock_handle, mem_clock=0, sm_clock=1410
+                self.mock_handle, mem_clock=1215, sm_clock=1410
             )
 
     def test_apply_setpoint_mem_clock(self):
         """Test applying memory clock setpoint."""
         mock_pynvml.nvmlInit.return_value = None
         mock_pynvml.nvmlDeviceSetApplicationsClocks.return_value = None
+        # Mock current SM clock retrieval
+        mock_pynvml.nvmlDeviceGetClockInfo.return_value = 1410
 
         with patch('quasim.hardware.backends.nvml_backend.NVML_AVAILABLE', True):
             from quasim.hardware.backends.nvml_backend import NVMLBackend
@@ -191,8 +196,9 @@ class TestNVMLBackendWithMock(unittest.TestCase):
             result = backend.apply_setpoint("GPU0", "mem_clock_mhz", 1215, dry_run=False)
 
             assert result["success"]
+            # Should preserve current SM clock (1410) and set memory clock to 1215
             mock_pynvml.nvmlDeviceSetApplicationsClocks.assert_called_once_with(
-                self.mock_handle, mem_clock=1215, sm_clock=0
+                self.mock_handle, mem_clock=1215, sm_clock=1410
             )
 
     def test_apply_setpoint_fan_speed(self):

@@ -50,6 +50,12 @@ class NVMLBackend:
                 name = pynvml.nvmlDeviceGetName(handle)
                 serial = pynvml.nvmlDeviceGetSerial(handle)
 
+                # Handle both str and bytes returns from pynvml
+                if isinstance(name, bytes):
+                    name = name.decode('utf-8')
+                if isinstance(serial, bytes):
+                    serial = serial.decode('utf-8')
+
                 devices.append({
                     "id": f"GPU{i}",
                     "index": i,
@@ -157,11 +163,21 @@ class NVMLBackend:
                 logger.info(f"Set {device_id} power limit to {value}W")
 
             elif parameter == "sm_clock_mhz":
-                pynvml.nvmlDeviceSetApplicationsClocks(handle, mem_clock=0, sm_clock=int(value))
+                # Get current memory clock to preserve it
+                try:
+                    current_mem_clock = pynvml.nvmlDeviceGetClockInfo(handle, pynvml.NVML_CLOCK_MEM)
+                except Exception:
+                    current_mem_clock = 0
+                pynvml.nvmlDeviceSetApplicationsClocks(handle, mem_clock=current_mem_clock, sm_clock=int(value))
                 logger.info(f"Set {device_id} SM clock to {value}MHz")
 
             elif parameter == "mem_clock_mhz":
-                pynvml.nvmlDeviceSetApplicationsClocks(handle, mem_clock=int(value), sm_clock=0)
+                # Get current SM clock to preserve it
+                try:
+                    current_sm_clock = pynvml.nvmlDeviceGetClockInfo(handle, pynvml.NVML_CLOCK_SM)
+                except Exception:
+                    current_sm_clock = 0
+                pynvml.nvmlDeviceSetApplicationsClocks(handle, mem_clock=int(value), sm_clock=current_sm_clock)
                 logger.info(f"Set {device_id} memory clock to {value}MHz")
 
             elif parameter == "fan_percent":
