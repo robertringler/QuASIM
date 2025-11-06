@@ -30,7 +30,7 @@ def discover(output_json: bool) -> None:
     """Discover available hardware devices."""
     manager = DeviceManager()
     devices = manager.discover()
-    
+
     if output_json:
         result = [
             {
@@ -55,10 +55,11 @@ def validate_policy(policy_path: Path) -> None:
     """Validate a policy configuration file."""
     try:
         validator = PolicyValidator.from_file(policy_path)
-        click.echo(f"✓ Policy validation passed")
-        click.echo(f"  Environment: {validator.policy.environment}")
-        click.echo(f"  Allowed backends: {', '.join(validator.policy.allowed_backends)}")
-        click.echo(f"  Limits: {validator.policy.limits}")
+        click.echo("✓ Policy validation passed")
+        if validator.policy:
+            click.echo(f"  Environment: {validator.policy.environment}")
+            click.echo(f"  Allowed backends: {', '.join(validator.policy.allowed_backends)}")
+            click.echo(f"  Limits: {validator.policy.limits}")
     except (FileNotFoundError, ValueError) as e:
         click.echo(f"✗ Policy validation failed: {e}", err=True)
         sys.exit(1)

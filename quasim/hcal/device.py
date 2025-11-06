@@ -9,7 +9,7 @@ from typing import Any
 @dataclass
 class Device:
     """Hardware device representation.
-    
+
     Attributes:
         id: Unique device identifier
         name: Human-readable device name
@@ -17,7 +17,7 @@ class Device:
         status: Current device status
         properties: Additional device properties
     """
-    
+
     id: str
     name: str
     type: str
@@ -27,14 +27,14 @@ class Device:
 
 class DeviceManager:
     """Manages hardware device discovery and lifecycle."""
-    
+
     def __init__(self) -> None:
         """Initialize device manager."""
         self._devices: dict[str, Device] = {}
-    
+
     def discover(self) -> list[Device]:
         """Discover available hardware devices.
-        
+
         Returns:
             List of discovered devices
         """
@@ -56,26 +56,26 @@ class DeviceManager:
                 properties={"channels": 8},
             ),
         ]
-        
+
         for device in mock_devices:
             self._devices[device.id] = device
-        
+
         return mock_devices
-    
+
     def get_device(self, device_id: str) -> Device | None:
         """Get device by ID.
-        
+
         Args:
             device_id: Device identifier
-            
+
         Returns:
             Device if found, None otherwise
         """
         return self._devices.get(device_id)
-    
+
     def list_devices(self) -> list[Device]:
         """List all managed devices.
-        
+
         Returns:
             List of all devices
         """
