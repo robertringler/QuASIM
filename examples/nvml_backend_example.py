@@ -15,7 +15,7 @@ def main():
 
     # Check if NVML is available
     if not NVML_AVAILABLE:
-        print("⚠️  pynvml is not available - backend disabled")
+        print("WARNING: pynvml is not available - backend disabled")
         print("Install with: pip install pynvml")
         return
 

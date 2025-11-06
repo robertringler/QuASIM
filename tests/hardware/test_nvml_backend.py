@@ -21,8 +21,18 @@ from quasim.hardware import nvml_backend
 
 @pytest.fixture(autouse=True)
 def reset_mock():
-    """Reset mock calls before each test."""
+    """Reset mock calls and side effects before each test."""
     mock_pynvml_module.reset_mock()
+    # Clear all side effects for better test isolation
+    mock_pynvml_module.nvmlInit.side_effect = None
+    mock_pynvml_module.nvmlDeviceGetHandleByIndex.side_effect = None
+    mock_pynvml_module.nvmlDeviceGetPowerUsage.side_effect = None
+    mock_pynvml_module.nvmlDeviceGetPowerManagementLimit.side_effect = None
+    mock_pynvml_module.nvmlDeviceGetTemperature.side_effect = None
+    mock_pynvml_module.nvmlDeviceGetClockInfo.side_effect = None
+    mock_pynvml_module.nvmlDeviceGetFanSpeed.side_effect = None
+    mock_pynvml_module.nvmlDeviceGetEccMode.side_effect = None
+    mock_pynvml_module.nvmlDeviceGetPowerManagementDefaultLimit.side_effect = None
     yield
 
 
@@ -46,7 +56,6 @@ class TestNVMLBackendInitialization:
         mock_pynvml.nvmlInit.side_effect = Exception("NVML init failed")
         backend = nvml_backend.NVMLBackend()
         assert backend.initialized is False
-        mock_pynvml.nvmlInit.side_effect = None  # Reset for other tests
 
     def test_init_without_pynvml(self):
         """Test initialization when pynvml is not available."""
@@ -93,7 +102,6 @@ class TestListDevices:
         backend = nvml_backend.NVMLBackend()
         devices = backend.list_devices()
         assert devices == []
-        mock_pynvml.nvmlInit.side_effect = None  # Reset
 
     def test_list_devices_error(self, mock_pynvml):
         """Test error handling in device listing."""
@@ -101,7 +109,6 @@ class TestListDevices:
         backend = nvml_backend.NVMLBackend()
         devices = backend.list_devices()
         assert devices == []
-        mock_pynvml.nvmlDeviceGetCount.side_effect = None  # Reset
 
 
 class TestGetState:
@@ -109,15 +116,6 @@ class TestGetState:
 
     def test_get_state_success(self, mock_pynvml):
         """Test successful state retrieval."""
-        # Clear any side_effects from previous tests
-        mock_pynvml.nvmlDeviceGetHandleByIndex.side_effect = None
-        mock_pynvml.nvmlDeviceGetPowerUsage.side_effect = None
-        mock_pynvml.nvmlDeviceGetPowerManagementLimit.side_effect = None
-        mock_pynvml.nvmlDeviceGetTemperature.side_effect = None
-        mock_pynvml.nvmlDeviceGetClockInfo.side_effect = None
-        mock_pynvml.nvmlDeviceGetFanSpeed.side_effect = None
-        mock_pynvml.nvmlDeviceGetEccMode.side_effect = None
-
         mock_handle = MagicMock()
         mock_pynvml.nvmlDeviceGetHandleByIndex.return_value = mock_handle
         mock_pynvml.nvmlDeviceGetPowerUsage.return_value = 250000  # 250W in mW
@@ -144,13 +142,9 @@ class TestGetState:
         backend = nvml_backend.NVMLBackend()
         state = backend.get_state("GPU0")
         assert state == {}
-        mock_pynvml.nvmlInit.side_effect = None  # Reset
 
     def test_get_state_partial_failure(self, mock_pynvml):
         """Test state retrieval with partial failures."""
-        # Clear any side_effects from previous tests
-        mock_pynvml.nvmlDeviceGetHandleByIndex.side_effect = None
-
         mock_handle = MagicMock()
         mock_pynvml.nvmlDeviceGetHandleByIndex.return_value = mock_handle
         mock_pynvml.nvmlDeviceGetPowerUsage.side_effect = Exception("Power failed")
@@ -171,20 +165,12 @@ class TestGetState:
         assert state["fan_percent"] is None
         assert state["ecc_enabled"] is None
 
-        # Clean up side effects
-        mock_pynvml.nvmlDeviceGetPowerUsage.side_effect = None
-        mock_pynvml.nvmlDeviceGetPowerManagementLimit.side_effect = None
-        mock_pynvml.nvmlDeviceGetClockInfo.side_effect = None
-        mock_pynvml.nvmlDeviceGetFanSpeed.side_effect = None
-        mock_pynvml.nvmlDeviceGetEccMode.side_effect = None
-
     def test_get_state_complete_failure(self, mock_pynvml):
         """Test state retrieval with complete failure."""
         mock_pynvml.nvmlDeviceGetHandleByIndex.side_effect = Exception("Handle failed")
         backend = nvml_backend.NVMLBackend()
         state = backend.get_state("GPU0")
         assert state == {}
-        mock_pynvml.nvmlDeviceGetHandleByIndex.side_effect = None  # Reset
 
 
 class TestApplySetpoint:
@@ -288,7 +274,6 @@ class TestApplySetpoint:
         result = backend.apply_setpoint("GPU0", "power_limit_w", 250)
         assert result["success"] is False
         assert "not initialized" in result["error"]
-        mock_pynvml.nvmlInit.side_effect = None  # Reset
 
     def test_apply_setpoint_error(self, mock_pynvml):
         """Test error handling in setpoint application."""
@@ -298,7 +283,6 @@ class TestApplySetpoint:
 
         assert result["success"] is False
         assert "Apply failed" in result["error"]
-        mock_pynvml.nvmlDeviceGetHandleByIndex.side_effect = None  # Reset
 
 
 class TestResetToDefaults:
@@ -342,7 +326,6 @@ class TestResetToDefaults:
 
         assert result["success"] is True
         mock_pynvml.nvmlDeviceResetApplicationsClocks.assert_called()
-        mock_pynvml.nvmlDeviceGetPowerManagementDefaultLimit.side_effect = None  # Reset
 
     def test_reset_not_initialized(self, mock_pynvml):
         """Test reset when not initialized."""
@@ -351,7 +334,6 @@ class TestResetToDefaults:
         result = backend.reset_to_defaults("GPU0")
         assert result["success"] is False
         assert "not initialized" in result["error"]
-        mock_pynvml.nvmlInit.side_effect = None  # Reset
 
     def test_reset_error(self, mock_pynvml):
         """Test error handling in reset."""
@@ -361,7 +343,6 @@ class TestResetToDefaults:
 
         assert result["success"] is False
         assert "Reset failed" in result["error"]
-        mock_pynvml.nvmlDeviceGetHandleByIndex.side_effect = None  # Reset
 
 
 class TestNVMLAvailableFlag:
