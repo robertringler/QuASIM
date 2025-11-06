@@ -130,7 +130,9 @@ class QuantacosmorphysigeneticField:
 
         # Evolution: field dynamics with coupling and interactions
         field_evolution = (
-            coupling * laplacian - interaction * self._field**3 + noise * np.random.randn(*self._field.shape)
+            coupling * laplacian
+            - interaction * self._field**3
+            + noise * np.random.randn(*self._field.shape)
         )
 
         # Update field
@@ -235,7 +237,12 @@ class QuantacosmorphysigeneticField:
         energy = np.sum(self._field**2)
 
         # Create and store state
-        state = FieldState(time=self._time, coherence=float(coherence), entropy=float(entropy), energy=float(energy))
+        state = FieldState(
+            time=self._time,
+            coherence=float(coherence),
+            entropy=float(entropy),
+            energy=float(energy),
+        )
 
         self._history.append(state)
 
