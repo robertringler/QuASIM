@@ -118,5 +118,9 @@ class PolicyValidator:
         if not self.policy or resource not in self.policy.limits:
             return True
 
-        limit = int(self.policy.limits[resource])
+        try:
+            limit = int(self.policy.limits[resource])
+        except (ValueError, TypeError):
+            # Invalid limit value; treat as policy violation
+            return False
         return value <= limit
