@@ -39,7 +39,8 @@ from typing import Any, Dict, Optional, Tuple
 
 from quasim.hcal.actuator import Actuator
 from quasim.hcal.backends.nvidia_nvml import NvidiaNvmlBackend
-from quasim.hcal.loops.calibration import CalibrationResult, bias_trim_v1, power_sweep
+from quasim.hcal.loops.calibration import (CalibrationResult, bias_trim_v1,
+                                           power_sweep)
 from quasim.hcal.policy import PolicyEngine
 from quasim.hcal.sensors import SensorManager, TelemetryReading
 from quasim.hcal.topology import TopologyDiscovery
@@ -227,12 +228,8 @@ Hardware Control Abstraction Layer (HCAL) for QuASIM.
 This module provides policy enforcement and safety mechanisms for hardware control operations.
 """
 
-from quasim.hcal.policy import (
-    DeviceLimits,
-    Environment,
-    PolicyEngine,
-    PolicyViolation,
-)
+from quasim.hcal.policy import (DeviceLimits, Environment, PolicyEngine,
+                                PolicyViolation)
 
 __all__ = [
     "DeviceLimits",

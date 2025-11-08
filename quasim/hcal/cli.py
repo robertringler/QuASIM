@@ -1,6 +1,7 @@
 """Command-line interface for HCAL."""
 
 from __future__ import annotations
+
 """
 Command-line interface for QuASIM Hardware Calibration and Analysis Layer.
 
@@ -9,6 +10,7 @@ for quantum simulation workloads.
 """
 
 import sys
+
 import click
 
 
@@ -22,7 +24,6 @@ def cli():
 """CLI interface for HCAL."""
 
 import json
-import sys
 from pathlib import Path
 
 import click
@@ -102,14 +103,14 @@ def status():
     """Display hardware status and availability."""
     click.echo("Hardware Status:")
     click.echo("================")
-    
+
     # Check for NVIDIA GPU
     try:
         import pynvml
         pynvml.nvmlInit()
         device_count = pynvml.nvmlDeviceGetCount()
         click.echo(f"✓ NVIDIA GPUs detected: {device_count}")
-        
+
         for i in range(device_count):
             handle = pynvml.nvmlDeviceGetHandleByIndex(i)
             name = pynvml.nvmlDeviceGetName(handle)
@@ -120,24 +121,24 @@ def status():
             free_gb = memory_info.free / (1024**3)
             click.echo(f"  GPU {i}: {name}")
             click.echo(f"    Memory: {free_gb:.2f}GB / {total_gb:.2f}GB free")
-        
+
         pynvml.nvmlShutdown()
     except ImportError:
         click.echo("✗ NVIDIA GPU support not available (install with: pip install quasim[hcal-nvidia])")
     except Exception as e:
         click.echo(f"✗ Error accessing NVIDIA GPUs: {e}")
-    
+
     # Check for AMD GPU
     try:
         import pyrsmi
         pyrsmi.rsmi_init()
         device_count = pyrsmi.rsmi_num_monitor_devices()
         click.echo(f"✓ AMD GPUs detected: {device_count}")
-        
+
         for i in range(device_count):
             name = pyrsmi.rsmi_dev_name_get(i)
             click.echo(f"  GPU {i}: {name}")
-        
+
         pyrsmi.rsmi_shut_down()
     except ImportError:
         click.echo("✗ AMD GPU support not available (install with: pip install quasim[hcal-amd])")
@@ -151,13 +152,13 @@ def status():
 def calibrate(config, output):
     """Run hardware calibration procedures."""
     click.echo("Running hardware calibration...")
-    
+
     if config:
         click.echo(f"Using configuration: {config}")
-    
+
     # Placeholder for calibration logic
     click.echo("Calibration complete.")
-    
+
     if output:
         click.echo(f"Results saved to: {output}")
 
@@ -168,10 +169,10 @@ def calibrate(config, output):
 def monitor(duration, interval):
     """Monitor hardware resources in real-time."""
     import time
-    
+
     click.echo(f"Monitoring hardware for {duration} seconds (sampling every {interval}s)...")
     click.echo("Press Ctrl+C to stop")
-    
+
     try:
         start_time = time.time()
         while time.time() - start_time < duration:
@@ -181,7 +182,7 @@ def monitor(duration, interval):
             time.sleep(interval)
     except KeyboardInterrupt:
         click.echo("\nMonitoring stopped by user")
-    
+
     click.echo("\nMonitoring complete.")
 
 
@@ -190,9 +191,9 @@ def info():
     """Display system and package information."""
     click.echo("QuASIM HCAL Information:")
     click.echo("========================")
-    click.echo(f"Version: 0.1.0")
+    click.echo("Version: 0.1.0")
     click.echo(f"Python: {sys.version}")
-    
+
     # Check installed optional dependencies
     deps = []
     try:
@@ -200,25 +201,25 @@ def info():
         deps.append("pyyaml")
     except ImportError:
         pass
-    
+
     try:
         import numpy
         deps.append("numpy")
     except ImportError:
         pass
-    
+
     try:
         import pynvml
         deps.append("nvidia-ml-py (NVIDIA support)")
     except ImportError:
         pass
-    
+
     try:
         import pyrsmi
         deps.append("pyrsmi (AMD support)")
     except ImportError:
         pass
-    
+
     if deps:
         click.echo(f"Installed dependencies: {', '.join(deps)}")
     else:

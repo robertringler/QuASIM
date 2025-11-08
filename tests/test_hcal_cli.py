@@ -60,7 +60,7 @@ def test_calibrate_command_with_config(runner, tmp_path):
     """Test the calibrate command with config file."""
     config_file = tmp_path / "config.yaml"
     config_file.write_text("test: value\n")
-    
+
     result = runner.invoke(cli, ["calibrate", "--config", str(config_file)])
     assert result.exit_code == 0
     assert "Using configuration:" in result.output
@@ -70,7 +70,7 @@ def test_calibrate_command_with_config(runner, tmp_path):
 def test_calibrate_command_with_output(runner, tmp_path):
     """Test the calibrate command with output path."""
     output_file = tmp_path / "results.yaml"
-    
+
     result = runner.invoke(cli, ["calibrate", "--output", str(output_file)])
     assert result.exit_code == 0
     assert "Results saved to:" in result.output
