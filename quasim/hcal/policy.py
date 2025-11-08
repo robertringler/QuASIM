@@ -330,10 +330,14 @@ class PolicyEngine:
     PROD = "PROD"
 
 
-class PolicyViolation(Exception):
+class PolicyViolationError(Exception):
     """Exception raised when a policy is violated."""
 
     pass
+
+
+# Backwards compatibility alias
+PolicyViolation = PolicyViolationError
 
 
 @dataclass
