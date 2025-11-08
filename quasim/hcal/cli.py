@@ -87,7 +87,7 @@ if HAS_CLICK and click is not None:
                 })
                 hcal = HCAL(default_policy)
 
-            device_list = devices.split(",") if devices else None
+            device_list = devices.split(",") if devices and devices.strip() else None
             plan_result = hcal.plan(profile=profile, devices=device_list)
 
             if out:

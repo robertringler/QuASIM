@@ -144,7 +144,7 @@ class HCAL:
             **kwargs: Additional parameters
 
         Returns:
-            Plan dictionary
+            Plan dictionary with 'devices' and optional 'warnings' for filtered devices
         """
         plan = {
             "plan_id": str(uuid.uuid4()),
@@ -156,6 +156,7 @@ class HCAL:
         if devices is None:
             devices = self.policy.device_allowlist
 
+        filtered_devices = []
         for device_id in devices:
             if device_id in self.policy.device_allowlist:
                 # Generate profile-specific setpoints
@@ -172,6 +173,15 @@ class HCAL:
                     setpoints["clock_mhz"] = 1200
 
                 plan["devices"][device_id] = setpoints
+            else:
+                filtered_devices.append(device_id)
+
+        # Add warning if any devices were filtered out
+        if filtered_devices:
+            plan["warnings"] = {
+                "filtered_devices": filtered_devices,
+                "reason": "Devices not on allowlist",
+            }
 
         self.audit_logger.log_event("plan", plan)
         return plan
