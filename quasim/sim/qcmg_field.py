@@ -149,8 +149,8 @@ class QuantacosmomorphysigeneticField:
         elif mode == "soliton":
             # Soliton-like profile using sech function
             width = 1.0
-            self.phi_m = np.cosh((x - np.pi) / width) ** (-1) * np.exp(1j * x)
-            self.phi_i = np.cosh((x - np.pi) / width) ** (-1) * np.exp(-1j * 0.5 * x)
+            self.phi_m = 1 / np.cosh((x - np.pi) / width) * np.exp(1j * x)
+            self.phi_i = 1 / np.cosh((x - np.pi) / width) * np.exp(-1j * 0.5 * x)
 
         elif mode == "random":
             # Random complex field
