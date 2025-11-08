@@ -408,7 +408,7 @@ class HCAL:
         Returns:
             Stop result
         """
-        result = {"stopped": True, "timestamp": uuid.uuid4()}
+        result = {"stopped": True, "timestamp": str(uuid.uuid4())}
         if hasattr(self.actuator, 'emergency_stop'):
             self.actuator.emergency_stop()
         self.audit_logger.log_event("emergency_stop", result)
