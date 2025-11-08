@@ -39,3 +39,4 @@ plan.json
 
 # Package build artifacts
 *.egg-info/
+coverage.json
