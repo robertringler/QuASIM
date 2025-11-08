@@ -1,3 +1,20 @@
+"""HCAL - Hardware Control Abstraction Layer.
+
+HCAL provides a hardware abstraction layer for controlling and monitoring
+physical hardware devices in quantum computing and simulation environments.
+
+Modules:
+    device: Device discovery and management
+    policy: Policy enforcement and validation
+    cli: Command-line interface utilities
+"""
+
+from __future__ import annotations
+
+__version__ = "0.1.0"
+
+__all__ = [
+    "__version__",
 """HCAL - Hardware Control Abstraction Layer."""
 
 import uuid
@@ -46,7 +63,8 @@ from typing import Any, Dict, Optional, Tuple
 
 from quasim.hcal.actuator import Actuator
 from quasim.hcal.backends.nvidia_nvml import NvidiaNvmlBackend
-from quasim.hcal.loops.calibration import CalibrationResult, bias_trim_v1, power_sweep
+from quasim.hcal.loops.calibration import (CalibrationResult, bias_trim_v1,
+                                           power_sweep)
 from quasim.hcal.policy import PolicyEngine
 from quasim.hcal.sensors import SensorManager, TelemetryReading
 from quasim.hcal.topology import TopologyDiscovery
@@ -442,12 +460,8 @@ Hardware Control Abstraction Layer (HCAL) for QuASIM.
 This module provides policy enforcement and safety mechanisms for hardware control operations.
 """
 
-from quasim.hcal.policy import (
-    DeviceLimits,
-    Environment,
-    PolicyEngine,
-    PolicyViolation,
-)
+from quasim.hcal.policy import (DeviceLimits, Environment, PolicyEngine,
+                                PolicyViolation)
 
 __all__ = [
     "DeviceLimits",
