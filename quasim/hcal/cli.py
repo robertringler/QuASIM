@@ -111,13 +111,8 @@ if HAS_CLICK and click is not None:
             if policy:
                 hcal = HCAL.from_policy(Path(policy))
             else:
-                # Use default policy
-                default_policy = Policy({
-                    "environment": "DEV",
-                    "allowed_backends": ["nvml", "rocm_smi"],
-                    "device_allowlist": [],
-                })
-                hcal = HCAL(default_policy)
+                # Use default policy (no policy file)
+                hcal = HCAL(dry_run=True)
 
             topology = hcal.discover(full=True)
 
@@ -142,12 +137,8 @@ if HAS_CLICK and click is not None:
             if policy:
                 hcal = HCAL.from_policy(Path(policy))
             else:
-                default_policy = Policy({
-                    "environment": "DEV",
-                    "allowed_backends": ["nvml"],
-                    "device_allowlist": ["GPU0", "GPU1"],
-                })
-                hcal = HCAL(default_policy)
+                # Use default policy (no policy file)
+                hcal = HCAL(dry_run=True)
 
             device_list = devices.split(",") if devices and devices.strip() else None
             plan_result = hcal.plan(profile=profile, devices=device_list)
@@ -172,13 +163,8 @@ if HAS_CLICK and click is not None:
             if policy:
                 hcal = HCAL.from_policy(Path(policy))
             else:
-                default_policy = Policy({
-                    "environment": "DEV",
-                    "allowed_backends": ["nvml"],
-                    "device_allowlist": ["GPU0", "GPU1"],
-                    "limits": {"power_watts_max": 300},
-                })
-                hcal = HCAL(default_policy)
+                # Use default policy (no policy file)
+                hcal = HCAL(dry_run=True)
 
             with open(plan_file) as f:
                 plan_data = json.load(f)
@@ -197,7 +183,11 @@ def main():
         print("Install with: pip install click", file=sys.stderr)
         sys.exit(1)
 
+import json
 import click
+
+from pathlib import Path
+from typing import Optional
 
 from quasim.hcal import HCAL
 from quasim.hcal.loops.reconfig_profiles import ProfileManager
@@ -208,6 +198,59 @@ from quasim.hcal.topology import TopologyDiscovery
 def cli():
     """QuASIM Hardware Control & Calibration Layer (HCAL) CLI."""
     pass
+
+
+@cli.command()
+@click.option("--json", "output_json", is_flag=True, help="Output as JSON")
+@click.option("--policy", type=click.Path(exists=True), help="Policy file path")
+def discover(output_json: bool, policy: Optional[str]):
+    """Discover hardware topology."""
+    try:
+        if policy:
+            hcal = HCAL.from_policy(Path(policy))
+        else:
+            # Use default policy (no policy file)
+            hcal = HCAL(dry_run=True)
+
+        topology = hcal.discover(full=True)
+
+        if output_json:
+            click.echo(json.dumps(topology, indent=2))
+        else:
+            click.echo(f"Discovered {topology['summary']['total_devices']} devices")
+            for device in topology["devices"]:
+                click.echo(f"  - {device['id']} ({device['type']})")
+    except Exception as e:
+        click.echo(f"Error: {e}", file=sys.stderr)
+        sys.exit(1)
+
+
+@cli.command()
+@click.option("--profile", required=True, help="Configuration profile")
+@click.option("--devices", help="Comma-separated device IDs")
+@click.option("--out", type=click.Path(), help="Output file path")
+@click.option("--policy", type=click.Path(exists=True), help="Policy file path")
+def plan(profile: str, devices: Optional[str], out: Optional[str], policy: Optional[str]):
+    """Create hardware configuration plan."""
+    try:
+        if policy:
+            hcal = HCAL.from_policy(Path(policy))
+        else:
+            # Use default policy (no policy file)
+            hcal = HCAL(dry_run=True)
+
+        device_list = devices.split(",") if devices and devices.strip() else None
+        plan_result = hcal.plan(profile=profile, devices=device_list)
+
+        if out:
+            with open(out, "w") as f:
+                json.dump(plan_result, f, indent=2)
+            click.echo(f"Plan written to {out}")
+        else:
+            click.echo(json.dumps(plan_result, indent=2))
+    except Exception as e:
+        click.echo(f"Error: {e}", file=sys.stderr)
+        sys.exit(1)
 
 
 @cli.command()
@@ -405,12 +448,12 @@ def discover(json_output: bool):
             click.echo(f"  Node {node}: {', '.join(devices)}")
 
 
-@cli.command()
+@cli.command(name="plan-profile")
 @click.option("--profile", required=True, help="Reconfiguration profile name")
 @click.option("--device", required=True, help="Device ID (e.g., gpu0)")
 @click.option("--json-output", is_flag=True, help="Output in JSON format")
-def plan(profile: str, device: str, json_output: bool):
-    """Create a reconfiguration plan."""
+def plan_profile(profile: str, device: str, json_output: bool):
+    """Create a reconfiguration plan (legacy command)."""
     profile_mgr = ProfileManager()
 
     profile_obj = profile_mgr.get_profile(profile)
