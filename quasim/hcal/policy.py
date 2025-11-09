@@ -128,8 +128,6 @@ class PolicyValidator:
 
 """HCAL policy enforcement and validation."""
 
-from typing import Dict
-
 """Policy engine for HCAL - declarative YAML-based policy configuration."""
 
 import time
