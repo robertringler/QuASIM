@@ -116,6 +116,7 @@ def main():
     parser.add_argument("--T", type=float, default=3.0)
     parser.add_argument("--seed", type=int, default=0, help="Random seed for reproducibility")
     parser.add_argument("--emit-json", action="store_true", help="Emit results as JSON")
+    parser.add_argument("--record", action="store_true", help="Generate video artifacts (MP4 and GIF)")
     args = parser.parse_args()
 
     a_opt, hist, logs = optimize_a(
@@ -145,8 +146,9 @@ def main():
     # Generate reproducible hash for video filenames
     repro_hash = _generate_video_hash(args.seed, args.steps, args.N, args.T)
     
-    # Create video artifacts
-    _create_video_artifacts(a_opt, hist, logs, args.T, args.N, repro_hash)
+    # Create video artifacts if --record flag is set
+    if args.record:
+        _create_video_artifacts(a_opt, hist, logs, args.T, args.N, repro_hash)
     
     # Emit JSON if requested
     if args.emit_json:
