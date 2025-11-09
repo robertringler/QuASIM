@@ -2,9 +2,9 @@
 # Tiny CLI: run coupled simulation + print objective
 
 import argparse
-import numpy as np
 
 from quasim.control.optimizer import optimize_a
+
 
 def main():
     parser = argparse.ArgumentParser(
@@ -33,10 +33,9 @@ def main():
 
     J_final = hist[-1][0]
     print(f"[quasim] final objective: {J_final:.6f}")
-    print(
-        f"[quasim] a(t): mean={a_opt.mean():.3f}, min={a_opt.min():.3f}, max={a_opt.max():.3f}"
-    )
+    print(f"[quasim] a(t): mean={a_opt.mean():.3f}, min={a_opt.min():.3f}, max={a_opt.max():.3f}")
     print(f"[quasim] logs: keys={list(logs.keys())}")
+
 
 if __name__ == "__main__":
     main()
