@@ -290,9 +290,9 @@ class ValidationRunner:
             "total_tiers": len(tier_results),
             "total_experiments": total_experiments,
             "passed_experiments": passed_experiments,
-            "success_rate": passed_experiments / total_experiments
-            if total_experiments > 0
-            else 0.0,
+            "success_rate": (
+                passed_experiments / total_experiments if total_experiments > 0 else 0.0
+            ),
             "all_passed": passed_experiments == total_experiments,
         }
 
