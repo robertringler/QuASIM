@@ -1,14 +1,14 @@
 """Hot staging scenarios."""
 
-from typing import Dict, Any
+from typing import Any, Dict
 
 
 def load_scenario(name: str) -> Dict[str, Any]:
     """Load predefined scenario.
-    
+
     Args:
         name: Scenario name
-        
+
     Returns:
         Scenario configuration dictionary
     """
@@ -38,5 +38,5 @@ def load_scenario(name: str) -> Dict[str, Any]:
             "staging_time": 140,
         },
     }
-    
+
     return scenarios.get(name, scenarios["starship"])
