@@ -107,7 +107,7 @@ performance and financial value, enabling real-time entanglement monetization:
 - Market depth simulation: **50** orders
 
 Revenue potential calculation:
-R = k × N² × η_ent × P_EPH × σ_market
+R = k × N² × η_ent × P_EPH × eph_volatility_pct
 Projected capacity: **4.6×10⁹ EPH/hour** at current efficiency
 
 ### Strategic Outcome & Phase VII Readiness
