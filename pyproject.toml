@@ -43,6 +43,11 @@ ownai = [
     "pillow>=10.0.0",
     "matplotlib>=3.7.0",
 ]
+terc = [
+    "scipy>=1.10.0",
+    "pandas>=2.0.0",
+    "matplotlib>=3.7.0",
+]
 hcal = [
     "pyyaml>=6.0",
     "click>=8.0",
