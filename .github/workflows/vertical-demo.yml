@@ -136,7 +136,7 @@ jobs:
           echo "|----------|-------|----------------|----------|-----------------|" >> $GITHUB_STEP_SUMMARY
           
           for report in aerospace_f9_demo_report.json telecom_constellation_demo_report.json finance_var_demo_report.json healthcare_genomics_demo_report.json energy_grid_demo_report.json transportation_logistics_demo_report.json manufacturing_iiot_demo_report.json agritech_optimization_demo_report.json; do
-            python -c "import json; f=open('$report'); data=json.load(f); print(f'| {data[\"vertical\"].title()} | {data[\"optimized_alpha\"]:.6f} | {data[\"fitness_rmse\"]:.6f} | {data[\"validation_metrics\"][\"fidelity\"]:.4f} | {len(data[\"compliance_tags\"])} |')" >> $GITHUB_STEP_SUMMARY
+            python -c "import json; with open('$report') as f: data=json.load(f); print(f'| {data[\"vertical\"].title()} | {data[\"optimized_alpha\"]:.6f} | {data[\"fitness_rmse\"]:.6f} | {data[\"validation_metrics\"][\"fidelity\"]:.4f} | {len(data[\"compliance_tags\"])} |')" >> $GITHUB_STEP_SUMMARY
           done
           
           echo "" >> $GITHUB_STEP_SUMMARY
