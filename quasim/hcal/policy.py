@@ -128,6 +128,8 @@ class PolicyValidator:
 
 """HCAL policy enforcement and validation."""
 
+from typing import Dict
+
 """Policy engine for HCAL - declarative YAML-based policy configuration."""
 
 import time
@@ -789,3 +791,12 @@ class PolicyEngine:
             expected_token = token_file.read_text().strip()
             if token != expected_token:
                 raise PolicyViolation("Invalid approval token")
+
+    def is_dry_run_default(self) -> bool:
+        """
+        Check if dry-run mode is the default for this policy.
+
+        Returns:
+            True if dry-run is the default mode
+        """
+        return self.config.get("dry_run_default", True)
