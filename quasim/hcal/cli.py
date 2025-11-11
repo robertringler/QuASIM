@@ -116,6 +116,15 @@ if HAS_CLICK and click is not None:
             if policy:
                 hcal = HCAL.from_policy(Path(policy))
             else:
+                # Use default policy
+                default_policy = Policy(
+                    {
+                        "environment": "DEV",
+                        "allowed_backends": ["nvml", "rocm_smi"],
+                        "device_allowlist": [],
+                    }
+                )
+                hcal = HCAL(default_policy)
                 # Use default policy (no policy file)
                 hcal = HCAL(dry_run=True)
 
@@ -142,6 +151,14 @@ if HAS_CLICK and click is not None:
             if policy:
                 hcal = HCAL.from_policy(Path(policy))
             else:
+                default_policy = Policy(
+                    {
+                        "environment": "DEV",
+                        "allowed_backends": ["nvml"],
+                        "device_allowlist": ["GPU0", "GPU1"],
+                    }
+                )
+                hcal = HCAL(default_policy)
                 # Use default policy (no policy file)
                 hcal = HCAL(dry_run=True)
 
@@ -168,6 +185,15 @@ if HAS_CLICK and click is not None:
             if policy:
                 hcal = HCAL.from_policy(Path(policy))
             else:
+                default_policy = Policy(
+                    {
+                        "environment": "DEV",
+                        "allowed_backends": ["nvml"],
+                        "device_allowlist": ["GPU0", "GPU1"],
+                        "limits": {"power_watts_max": 300},
+                    }
+                )
+                hcal = HCAL(default_policy)
                 # Use default policy (no policy file)
                 hcal = HCAL(dry_run=True)
 
