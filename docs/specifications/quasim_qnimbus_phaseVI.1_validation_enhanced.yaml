@@ -464,7 +464,7 @@ tasks:
       - title: Pricing Model Implementation
         actions:
           - Create qmp/qex-sandbox/pricing/model.py with enhanced formula
-          - Implement R = k × N² × η_ent × P_EPH × σ_market
+          - Implement R = k × N² × η_ent × P_EPH × eph_volatility_pct
           - Add market constant calibration based on historical efficiency
           - Implement volatility-adjusted pricing with VaR calculation
 
@@ -597,7 +597,7 @@ tasks:
       - Market depth simulation: ${inputs.economics.market_depth_orders} orders
 
       Revenue potential calculation:
-      R = k × N² × η_ent × P_EPH × σ_market
+      R = k × N² × η_ent × P_EPH × eph_volatility_pct
       Projected capacity: ${metrics.qmp_projected_capacity_eph_per_hour} EPH/hour at current efficiency
 
       ### Strategic Outcome & Phase VII Readiness
