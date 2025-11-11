@@ -69,7 +69,7 @@ jobs:
           # Verify JSON structure for each vertical
           for report in aerospace_f9_demo_report.json telecom_constellation_demo_report.json finance_var_demo_report.json healthcare_genomics_demo_report.json energy_grid_demo_report.json transportation_logistics_demo_report.json manufacturing_iiot_demo_report.json agritech_optimization_demo_report.json; do
             echo "Validating $report..."
-            python -c "import json; f=open('$report'); data=json.load(f); assert 'optimized_alpha' in data; assert 'fitness_rmse' in data; assert 'compliance_tags' in data; assert 'vertical' in data; print(f'✓ {data[\"vertical\"]}: alpha={data[\"optimized_alpha\"]:.6f}, fitness={data[\"fitness_rmse\"]:.6f}, compliance={len(data[\"compliance_tags\"])} tags')"
+            python -c "import json; with open('$report') as f: data=json.load(f); assert 'optimized_alpha' in data; assert 'fitness_rmse' in data; assert 'compliance_tags' in data; assert 'vertical' in data; print(f'✓ {data[\"vertical\"]}: alpha={data[\"optimized_alpha\"]:.6f}, fitness={data[\"fitness_rmse\"]:.6f}, compliance={len(data[\"compliance_tags\"])} tags')"
           done
 
       - name: Upload Aerospace demo report
