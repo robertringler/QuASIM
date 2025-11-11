@@ -62,6 +62,7 @@ Target customers include aerospace primes (Lockheed Martin, Northrop Grumman, Bo
 
 ## Key Highlights
 
+- **QuASIM×QuNimbus v5 Valuation Trajectory**: Φ_QEVF-guided deployment projects $50–60B pre-revenue valuation in 2025, scaling to $400B+ by 2035 as entanglement exchange markets mature.
 - **Autonomous Kernel Evolution (Phase III)**: Reinforcement learning-driven optimization with runtime introspection, energy-adaptive regulation (30%+ power savings), and formal verification via SMT constraints for mission-critical applications.
 - **cuQuantum Acceleration**: NVIDIA cuQuantum integration for hardware-accelerated tensor network contraction with FP8/FP16/FP32/FP64 precision modes, achieving 10-100× speedups over CPU implementations.
 - **Deterministic Reproducibility**: <1μs seed replay drift tolerance for certification compliance, enabling repeatable Monte Carlo campaigns with 1,024+ trajectory simulations at ≥0.97 fidelity.
