@@ -261,3 +261,10 @@ F --> G[Observability Stack (Grafana/Prometheus)]
   <sub>© 2025 <b>QuASIM × QuNimbus</b> — Quantum-Classical Infrastructure for the Aerospace Era.</sub><br>
   <a href="LICENSE">Apache 2.0 License</a> • <a href="https://quasim.io">Website</a>
 </p>
+
+## Phase VI.1 Operationalization (Automated)
+- Φ_QEVF verifier harness added (RMSE/MAE/variance, KS confidence with scipy)
+- ORD pipeline (zstd + signed manifests) at 30s with 6h checkpoints
+- Three-region observability manifests (Prometheus/Grafana/Thanos), retention 90d
+- QMP sandbox streams base EPH price 0.0004 USD with efficiency factor 0.93±0.02
+- CI gates: variance <5%, recall ≥95%, false positives <1%
