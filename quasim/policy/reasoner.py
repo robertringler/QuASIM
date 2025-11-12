@@ -361,7 +361,10 @@ class PolicyReasoner:
             # Add framework-specific approvers
             if rule.framework == PolicyFramework.DO_178C:
                 approvers.add("safety_engineer")
-            elif rule.framework == PolicyFramework.NIST_800_53 or rule.framework == PolicyFramework.CMMC_2_0:
+            elif (
+                rule.framework == PolicyFramework.NIST_800_53
+                or rule.framework == PolicyFramework.CMMC_2_0
+            ):
                 approvers.add("security_officer")
             elif rule.framework == PolicyFramework.ISO_27001:
                 approvers.add("information_security_manager")

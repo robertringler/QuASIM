@@ -1,7 +1,5 @@
 """Tests for Policy Reasoner."""
 
-import pytest
-
 from quasim.policy import (
     ConfigurationMutation,
     PolicyDecision,
@@ -106,7 +104,10 @@ def test_policy_reasoner_safety_critical_mutation():
     assert evaluation.decision == PolicyDecision.CONDITIONAL
     assert len(evaluation.violated_rules) > 0
     assert len(evaluation.conditions) > 0
-    assert "safety_engineer" in evaluation.approved_by or "chief_compliance_officer" in evaluation.approved_by
+    assert (
+        "safety_engineer" in evaluation.approved_by
+        or "chief_compliance_officer" in evaluation.approved_by
+    )
 
 
 def test_policy_reasoner_access_control_mutation():

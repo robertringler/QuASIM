@@ -7,9 +7,6 @@ from .effmass import (
     test_dispersion_parabolic,
 )
 
-# Phase VIII Meta-Controller Kernel
-from .mck_controller import MCKAction, MCKState, MetaControllerKernel
-
 # Phase VIII Quantum Ethical Governor
 from .ethical_governor import (
     EthicalAssessment,
@@ -17,6 +14,9 @@ from .ethical_governor import (
     QuantumEthicalGovernor,
     ResourceMetrics,
 )
+
+# Phase VIII Meta-Controller Kernel
+from .mck_controller import MCKAction, MCKState, MetaControllerKernel
 
 __all__ = [
     "effective_mass_hamiltonian",

@@ -1,10 +1,5 @@
 """Tests for Meta-Controller Kernel (MCK)."""
 
-import json
-from pathlib import Path
-
-import pytest
-
 from quasim.meta import MCKAction, MCKState, MetaControllerKernel
 
 
@@ -148,9 +143,7 @@ def test_mck_convergence():
     target_variance = 0.10
 
     for episode in range(20):
-        current_variance = initial_variance - (initial_variance - target_variance) * (
-            episode / 20
-        )
+        current_variance = initial_variance - (initial_variance - target_variance) * (episode / 20)
 
         state = mck.observe_state(
             phi_variance=current_variance,

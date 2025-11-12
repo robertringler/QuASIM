@@ -1,7 +1,5 @@
 """Tests for Quantum Ethical Governor (QEG)."""
 
-import pytest
-
 from quasim.meta import (
     EthicalAssessment,
     FairnessMetrics,

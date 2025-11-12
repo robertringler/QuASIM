@@ -52,7 +52,7 @@ def main():
             error_rate=error_rate,
         )
 
-        print(f"  System State:")
+        print("  System State:")
         print(f"    Φ variance: {state.phi_variance:.3f}")
         print(f"    Compliance: {state.compliance_score:.1f}%")
         print(f"    Resources: {state.resource_utilization:.1%}")
@@ -141,7 +141,7 @@ def main():
     pr_stats = pr.get_statistics()
     print("Policy Reasoner:")
     print(f"  Total rules: {pr_stats['total_rules']}")
-    print(f"  Rules by framework:")
+    print("  Rules by framework:")
     for framework, count in pr_stats["rules_by_framework"].items():
         print(f"    {framework}: {count} rules")
     print()
