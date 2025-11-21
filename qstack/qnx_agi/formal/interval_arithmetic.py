@@ -75,7 +75,7 @@ class Interval:
 
 
 def propagate_affine(intervals: Dict[str, Interval], weights: Dict[str, float], bias: float = 0.0) -> Interval:
-    """Propagate an affine transform \sum w_i * x_i + bias over intervals."""
+    r"""Propagate an affine transform \sum w_i * x_i + bias over intervals."""
     low = bias
     high = bias
     for name, weight in sorted(weights.items(), key=lambda kv: kv[0]):

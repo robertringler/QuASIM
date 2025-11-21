@@ -7,6 +7,7 @@ from qstack.qnx_agi.formal import (
     SymbolicExecutor,
     ModelChecker,
     TLASpecification,
+    propagate_affine,
 )
 
 
@@ -16,6 +17,20 @@ def test_interval_arithmetic_operations():
     assert a.add(b).to_tuple() == (4.0, 6.0)
     assert a.sub(b).to_tuple() == (-3.0, -1.0)
     assert a.mul(b).to_tuple() == (3.0, 8.0)
+
+
+def test_interval_affine_propagation_is_deterministic():
+    env = {
+        "a": Interval(1.0, 2.0),
+        "b": Interval(-1.0, 0.0),
+    }
+    weights = {"a": 2.0, "b": 0.5}
+    result = propagate_affine(env, weights, bias=1.0)
+    # Expected bounds: bias=1.0, a contributes [2.0, 4.0], b contributes [-0.5, 0.0]
+    assert result.to_tuple() == (2.5, 5.0)
+    # repeated calls produce identical bounds when inputs are unchanged
+    repeat = propagate_affine(env, weights, bias=1.0)
+    assert repeat.to_tuple() == result.to_tuple()
 
 
 def test_symbolic_execution_and_model_checking():

@@ -1,5 +1,6 @@
 from .engine import SimulationEngine
 from .tensor_ops import matmul, tensor_contract
+from .tensor_contraction import contract_tensors
 from .circuits import QuantumCircuit, QuantumGate
 from .evaluators import evaluate_circuit, evaluate_tensor
 
@@ -7,6 +8,7 @@ __all__ = [
     "SimulationEngine",
     "matmul",
     "tensor_contract",
+    "contract_tensors",
     "QuantumCircuit",
     "QuantumGate",
     "evaluate_circuit",

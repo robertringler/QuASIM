@@ -8,6 +8,16 @@ from .attestation import Attestor
 from .trust_graph import TrustGraph
 from .registry import IdentityRegistry
 from .ledger import Ledger
+from .crypto import (
+    DeterministicMerkleTree,
+    DeterministicLedger,
+    DeterministicKeyExchange,
+    DeterministicAccessControlList,
+    DeterministicCapabilityToken,
+    CapabilityAuthority,
+    DeterministicRevocationList,
+    SovereignClusterReplication,
+)
 
 __all__ = [
     "KeyManager",
@@ -18,4 +28,12 @@ __all__ = [
     "TrustGraph",
     "IdentityRegistry",
     "Ledger",
+    "DeterministicMerkleTree",
+    "DeterministicLedger",
+    "DeterministicKeyExchange",
+    "DeterministicAccessControlList",
+    "DeterministicCapabilityToken",
+    "CapabilityAuthority",
+    "DeterministicRevocationList",
+    "SovereignClusterReplication",
 ]
