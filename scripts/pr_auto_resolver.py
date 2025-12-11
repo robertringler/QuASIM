@@ -26,8 +26,9 @@ try:
     from github.PullRequest import PullRequest
     from github.Repository import Repository
 except ImportError:
-    print("ERROR: PyGithub not installed. Run: pip install PyGithub")
-    sys.exit(1)
+    Github = None
+    GithubException = Exception
+    PullRequest = Repository = object
 
 
 @dataclass
@@ -61,6 +62,8 @@ class PRAutoResolver:
     MERGE_THRESHOLD_COVERAGE = 0.0  # Can be configured from repo settings
 
     def __init__(self, github_token: str, repo_name: str):
+        if Github is None:
+            raise ImportError("PyGithub not installed. Run: pip install PyGithub")
         self.gh = Github(github_token)
         self.repo: Repository = self.gh.get_repo(repo_name)
         self.repo_path = Path.cwd()
