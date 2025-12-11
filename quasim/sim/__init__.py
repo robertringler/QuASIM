@@ -263,9 +263,10 @@ class QuantacosmorphysigeneticField:
 
 __version__ = "0.1.0"
 
-# Backward compatibility alias
+# Backward compatibility aliases
 QCMGState = FieldState
-QuantacosmomorphysigeneticField = QuantacosmorphysigeneticField
+# Alias for alternate spelling (typo in original name)
+QuantacosmomorphysigeneticField = QuantacosmorphysigeneticField  # noqa: F811
 
 __all__ = [
     "__version__",

@@ -3,6 +3,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 
+from qnode.config import NodeConfig
 from qnode.monitor import HealthMonitor
 
 
