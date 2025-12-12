@@ -1,10 +1,8 @@
 """Tests for PromptLoader service."""
 
 import csv
-from pathlib import Path
 
 import pytest
-import yaml
 
 from qubic_meta_library.services import PromptLoader
 
