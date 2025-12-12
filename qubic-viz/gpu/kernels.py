@@ -249,6 +249,10 @@ class GPUKernels:
 
         Returns:
             Updated temperature
+
+        Note:
+            This is a simplified implementation without spatial derivatives.
+            For production use, implement proper finite difference stencils.
         """
         # Simplified diffusion (no spatial derivatives for now)
         return temperature

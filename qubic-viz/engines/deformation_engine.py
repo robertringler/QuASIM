@@ -8,6 +8,9 @@ import numpy as np
 
 from .mesh_generator import TireMesh
 
+# Default pressure in kPa for rolling deformation
+DEFAULT_PRESSURE_KPA = 200.0
+
 
 class DeformationEngine:
     """Engine for computing tire deformation.
@@ -104,7 +107,7 @@ class DeformationEngine:
                 uvs=mesh.uvs,
             ),
             load_kg,
-            200.0,  # Default pressure
+            DEFAULT_PRESSURE_KPA,
         )
 
         return contact_mesh

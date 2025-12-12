@@ -23,7 +23,7 @@ class RenderServer:
     """GPU render server using FastAPI.
 
     Args:
-        gpu_available: Whether GPU is available
+        gpu_available: Controls whether GPU acceleration is enabled for the render server
     """
 
     def __init__(self, gpu_available: bool = True) -> None:

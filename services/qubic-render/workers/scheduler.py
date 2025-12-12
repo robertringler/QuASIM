@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import asyncio
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 
 from .gpu_worker import RenderWorker
 
@@ -51,7 +51,7 @@ class TaskScheduler:
 
             self.job_queue.task_done()
 
-    def _get_available_worker(self) -> RenderWorker:
+    def _get_available_worker(self) -> Optional[RenderWorker]:
         """Get an available worker.
 
         Returns:
